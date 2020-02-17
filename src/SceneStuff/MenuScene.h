@@ -3,6 +3,8 @@
 #include "Scene.h"
 #include "ShaderStuff/Shader.h"
 
+#include "RenderStuff/Mesh.h"
+
 class MenuScene : public Scene
 {
 public:
@@ -16,4 +18,5 @@ private:
 	virtual void virtualUpdate(float dt)override;
 
 	Shader* myTestShader = NULL;
+	Mesh* myTestMesh = NULL;
 };

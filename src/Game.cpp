@@ -43,20 +43,23 @@ void Game::init()
 	menuScene->active = true;
 	_sceneManager->addScene(menuScene);
 
+	glEnable(GL_DEPTH_TEST);
+
+
 	std::cout << "Game has been initialized!" << std::endl;
 }
 
 void Game::runGame()
 {
-	static float prevFrame = glfwGetTime();
+	static float prevFrame = (float)glfwGetTime();
 	while (!glfwWindowShouldClose(_gameWindow)) {
 		glfwPollEvents();
 
-		float thisFrame = glfwGetTime();
+		float thisFrame = (float)glfwGetTime();
 		float deltaTime = thisFrame - prevFrame;
 
 		glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		_sceneManager->update(deltaTime);
 
 		prevFrame = thisFrame;

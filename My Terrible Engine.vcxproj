@@ -90,6 +90,7 @@
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\glad.c" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\RenderStuff\Mesh.cpp" />
     <ClCompile Include="src\SceneStuff\MenuScene.cpp" />
     <ClCompile Include="src\SceneStuff\Scene.cpp" />
     <ClCompile Include="src\SceneStuff\SceneManager.cpp" />
@@ -97,7 +98,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Game.h" />
+    <ClInclude Include="src\RenderStuff\Mesh.h" />
     <ClInclude Include="src\RenderStuff\QuadRenderer.h" />
+    <ClInclude Include="src\RenderStuff\Structs.h" />
     <ClInclude Include="src\SceneStuff\Scene.h" />
     <ClInclude Include="src\SceneStuff\SceneManager.h" />
     <ClInclude Include="src\SceneStuff\MenuScene.h" />
