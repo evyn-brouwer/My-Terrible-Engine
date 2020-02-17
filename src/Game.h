@@ -21,7 +21,7 @@ public:
 	void init();
 	void runGame();
 
-
+	void Resize(GLuint width, GLuint height);
 private:
 
 	GLuint _width, _height;

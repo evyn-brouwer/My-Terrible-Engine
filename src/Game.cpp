@@ -1,5 +1,11 @@
 #include "Game.h"
 
+
+void GlfwWindowResizedCallback(GLFWwindow* window, int width, int height) {
+	glViewport(0, 0, width, height);
+	
+}
+
 Game::Game(std::string gameName, GLuint width, GLuint height)
 	: _gameName(gameName),_width(width),_height(height)
 {
@@ -19,8 +25,9 @@ void Game::init()
 	if (glfwInit() == GLFW_FALSE) {
 		std::cout << "Failed to initialize Glad" << std::endl;
 	}
-	_gameWindow = glfwCreateWindow(_width, _height, _gameName.c_str(), nullptr, nullptr);
-
+	_gameWindow = glfwCreateWindow(_width, _height, _gameName.c_str(), nullptr, nullptr)
+		;
+	glfwSetWindowSizeCallback(_gameWindow, GlfwWindowResizedCallback);
 
 	glfwMakeContextCurrent(_gameWindow);
 
@@ -52,4 +59,10 @@ void Game::runGame()
 		glfwSwapBuffers(_gameWindow);
 	}
 
+}
+
+void Game::Resize(GLuint width, GLuint height)
+{
+	_width = width;
+	_height = height;
 }
