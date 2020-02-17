@@ -48,15 +48,22 @@ void Game::init()
 
 void Game::runGame()
 {
-
+	static float prevFrame = glfwGetTime();
 	while (!glfwWindowShouldClose(_gameWindow)) {
 		glfwPollEvents();
 
+		float thisFrame = glfwGetTime();
+		float deltaTime = thisFrame - prevFrame;
 
 		glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
+		_sceneManager->update(deltaTime);
+
+		prevFrame = thisFrame;
+		
 
 		glfwSwapBuffers(_gameWindow);
+		
 	}
 
 }
