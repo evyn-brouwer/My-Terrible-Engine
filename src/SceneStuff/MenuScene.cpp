@@ -1,4 +1,5 @@
 #include "MenuScene.h"
+#include <GLM\include\GLM\gtc\matrix_transform.hpp>
 
 MenuScene::MenuScene(GLFWwindow* window, std::string sceneName)
 	:Scene(window,sceneName)
@@ -25,11 +26,19 @@ void MenuScene::loadData()
 	2, 1, 3
 	};
 	myTestMesh = new Mesh(vertices, 4, indices, 6);
+
+
+	myTestCamera = new Camera();
+	myTestCamera->SetPosition(glm::vec3(5, 5, 5));
+	myTestCamera->LookAt(glm::vec3(0));
+	myTestCamera->Projection = glm::perspective(glm::radians(60.0f), 1.0f, 0.01f, 1000.0f);
+	
 }
 
 void MenuScene::virtualUpdate(float dt)
 {
 	myTestShader->Bind();
+	myTestShader->SetUniform("a_ModelViewProjection", myTestCamera->GetViewProjection());
 	myTestMesh->Draw();
 
 }

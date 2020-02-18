@@ -106,6 +106,13 @@ void Shader::Bind()
 	glUseProgram(myShaderHandle);
 }
 
+void Shader::SetUniform(const char* name, const glm::mat4& value) {
+	GLint loc = glGetUniformLocation(myShaderHandle, name);
+	if (loc != -1) {
+		glProgramUniformMatrix4fv(myShaderHandle, loc, 1, false, &value[0][0]);
+	}
+}
+
 GLuint Shader::__CompileShaderPart(const char* source, GLenum type)
 {
 	GLuint result = glCreateShader(type);
