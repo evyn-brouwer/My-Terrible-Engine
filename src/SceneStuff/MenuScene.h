@@ -22,11 +22,7 @@ private:
 
 	virtual void virtualUpdate(float dt)override;
 
-	Shader* myTestShader = NULL;
-	Mesh* myTestMesh = NULL;
-	Transform* myTestTransform = NULL;
+	Shader* myTestShader = NULL;;
 	Camera* myTestCamera = NULL;
 	Cube* myTestCube = NULL;
-	//QuadRenderer* myTestQuad = NULL;
-	//QuadRenderer yoinks[6];
 };
