@@ -19,9 +19,13 @@ public:
 
 	bool changeScene = false;
 	std::string newSceneName = "";
-private:
 
 	GLFWwindow* _gameWindow;
+	
+	virtual void Resize(int width,int height)=0;
+private:
+
+	
 
 	virtual void virtualUpdate(float dt) = 0;
 };

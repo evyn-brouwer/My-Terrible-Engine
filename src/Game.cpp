@@ -75,4 +75,6 @@ void Game::Resize(GLuint width, GLuint height)
 {
 	_width = width;
 	_height = height;
+	for (auto x : _sceneManager->_scenes)
+		x->Resize(width,height);
 }

@@ -14,10 +14,11 @@ public:
 
 	void addScene(Scene* newScene) { _scenes.push_back(newScene); }
 
+	std::vector<Scene*> _scenes;
 private:
 
 
-	std::vector<Scene*> _scenes;
+	
 
 
 };

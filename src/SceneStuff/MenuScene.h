@@ -4,6 +4,7 @@
 #include "ShaderStuff/Shader.h"
 #include "RenderStuff/Mesh.h"
 #include "RenderStuff/Camera.h"
+#include "RenderStuff/Transform.h"
 
 #include <glm/gtc/quaternion.hpp>
 
@@ -14,12 +15,13 @@ public:
 	
 	void loadData();
 
-
+	virtual void Resize(int Width,int Height)override;
 private:
 
 	virtual void virtualUpdate(float dt)override;
 
 	Shader* myTestShader = NULL;
 	Mesh* myTestMesh = NULL;
+	Transform* myTestTransform = NULL;
 	Camera* myTestCamera = NULL;
 };
