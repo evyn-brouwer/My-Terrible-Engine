@@ -6,6 +6,7 @@
 #include "RenderStuff/Camera.h"
 #include "RenderStuff/Transform.h"
 #include "RenderStuff/QuadRenderer.h"
+#include "WorldStuff/Cube.h"
 
 #include <glm/gtc/quaternion.hpp>
 
@@ -25,6 +26,7 @@ private:
 	Mesh* myTestMesh = NULL;
 	Transform* myTestTransform = NULL;
 	Camera* myTestCamera = NULL;
-	QuadRenderer* myTestQuad = NULL;
-	QuadRenderer yoinks[6];
+	Cube* myTestCube = NULL;
+	//QuadRenderer* myTestQuad = NULL;
+	//QuadRenderer yoinks[6];
 };

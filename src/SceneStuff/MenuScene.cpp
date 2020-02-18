@@ -34,14 +34,15 @@ void MenuScene::loadData()
 	myTestCamera->LookAt(glm::vec3(0));
 	myTestCamera->Projection = glm::perspective(glm::radians(60.0f), 1.0f, 0.01f, 1000.0f);
 	
-	myTestQuad = new QuadRenderer(glm::vec3(0,0,0),glm::vec3(1,0,0));
-
-	yoinks[0] = QuadRenderer(glm::vec3(0.0f), glm::vec3(1, 0, 0));
-	yoinks[1] = QuadRenderer(glm::vec3(0.0f), glm::vec3(-1, 0, 0));
-	yoinks[2] = QuadRenderer(glm::vec3(0.0f), glm::vec3(0, 0, 1));
-	yoinks[3] = QuadRenderer(glm::vec3(0.0f), glm::vec3(0, 0, -1));
-	yoinks[4] = QuadRenderer(glm::vec3(0.0f), glm::vec3(0, 1, 0));
-	yoinks[5] = QuadRenderer(glm::vec3(0.0f), glm::vec3(0, -1, 0));
+	myTestCube = new Cube(myTestShader,myTestCamera);
+	//myTestQuad = new QuadRenderer(glm::vec3(0,0,0),glm::vec3(1,0,0));
+	//
+	//yoinks[0] = QuadRenderer(glm::vec3(0.0f), glm::vec3(1, 0, 0));
+	//yoinks[1] = QuadRenderer(glm::vec3(0.0f), glm::vec3(-1, 0, 0));
+	//yoinks[2] = QuadRenderer(glm::vec3(0.0f), glm::vec3(0, 0, 1));
+	//yoinks[3] = QuadRenderer(glm::vec3(0.0f), glm::vec3(0, 0, -1));
+	//yoinks[4] = QuadRenderer(glm::vec3(0.0f), glm::vec3(0, 1, 0));
+	//yoinks[5] = QuadRenderer(glm::vec3(0.0f), glm::vec3(0, -1, 0));
 }
 
 void MenuScene::Resize(int Width, int Height)
@@ -85,19 +86,22 @@ void MenuScene::virtualUpdate(float dt)
 	myTestCamera->Rotate(rotation);
 	myTestCamera->Move(movement);
 
-	myTestTransform->_transformMat=myTestTransform->rotate(glm::vec3(1.0f,0.0,0.0),45.0f*dt);
-	myTestTransform->update();
+	myTestCube->_transform._transformMat = myTestCube->_transform.rotate(glm::vec3(1.0f, 0.0, 0.0), 45.0f * dt);
+	//myTestTransform->_transformMat=myTestTransform->rotate(glm::vec3(1.0f,0.0,0.0),45.0f*dt);
+	//myTestTransform->update();
 
-	myTestShader->Bind();
-	myTestShader->SetUniform("a_ModelViewProjection", myTestCamera->GetViewProjection() * myTestTransform->_transformMat);
+	//myTestShader->Bind();
+	//myTestShader->SetUniform("a_ModelViewProjection", myTestCamera->GetViewProjection() * myTestTransform->_transformMat);
 	//myTestMesh->Draw();
 	//myTestQuad->draw();
 	//myTestShader->SetUniform("a_ModelViewProjection", myTestCamera->GetViewProjection());
-	yoinks[0].draw();
-	yoinks[1].draw();
-	yoinks[2].draw();
-	yoinks[3].draw();
-	yoinks[4].draw();
-	yoinks[5].draw();
+
+	myTestCube->draw();
+	//yoinks[0].draw();
+	//yoinks[1].draw();
+	//yoinks[2].draw();
+	//yoinks[3].draw();
+	//yoinks[4].draw();
+	//yoinks[5].draw();
 
 }

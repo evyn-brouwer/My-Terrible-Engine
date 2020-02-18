@@ -99,6 +99,7 @@
     <ClCompile Include="src\SceneStuff\Scene.cpp" />
     <ClCompile Include="src\SceneStuff\SceneManager.cpp" />
     <ClCompile Include="src\ShaderStuff\Shader.cpp" />
+    <ClCompile Include="src\WorldStuff\Cube.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Game.h" />
@@ -111,6 +112,7 @@
     <ClInclude Include="src\SceneStuff\SceneManager.h" />
     <ClInclude Include="src\SceneStuff\MenuScene.h" />
     <ClInclude Include="src\ShaderStuff\Shader.h" />
+    <ClInclude Include="src\WorldStuff\Cube.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\testShader.fs" />
