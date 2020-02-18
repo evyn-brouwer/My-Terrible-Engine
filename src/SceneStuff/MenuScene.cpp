@@ -34,7 +34,7 @@ void MenuScene::loadData()
 	myTestCamera->LookAt(glm::vec3(0));
 	myTestCamera->Projection = glm::perspective(glm::radians(60.0f), 1.0f, 0.01f, 1000.0f);
 	
-	myTestCube = new Cube(myTestShader,myTestCamera);
+	myTestCube = new Cube(myTestShader,myTestCamera,glm::vec3(0,0,0));
 	//myTestQuad = new QuadRenderer(glm::vec3(0,0,0),glm::vec3(1,0,0));
 	//
 	//yoinks[0] = QuadRenderer(glm::vec3(0.0f), glm::vec3(1, 0, 0));

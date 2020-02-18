@@ -7,7 +7,7 @@
 class Cube
 {
 public:
-	Cube(Shader* shader,Camera* camera);
+	Cube(Shader* shader,Camera* camera, glm::vec3 position);
 
 	void draw();
 	
