@@ -14,14 +14,14 @@ QuadRenderer::QuadRenderer(glm::vec3 Pos, glm::vec3 Dir)
 	glCreateBuffers(2, myBuffers);
 
 	Vertex tempVerts[8] = {
-		Vertex(glm::vec3(-0.5, 0.5, 0.5),glm::vec4(1.0f,0.0f,0.0f,1.0f)),
-		Vertex(glm::vec3( 0.5, 0.5, 0.5),glm::vec4(0.5f,0.5f,0.0f,1.0f)),
-		Vertex(glm::vec3(-0.5, 0.5,-0.5),glm::vec4(0.0f,1.0f,0.0f,1.0f)),
-		Vertex(glm::vec3( 0.5, 0.5,-0.5),glm::vec4(0.0f,0.5f,0.5f,1.0f)),
-		Vertex(glm::vec3(-0.5,-0.5,-0.5),glm::vec4(0.0f,0.0f,1.0f,1.0f)),
-		Vertex(glm::vec3( 0.5,-0.5,-0.5),glm::vec4(0.5f,0.0f,0.5f,1.0f)),
-		Vertex(glm::vec3(-0.5,-0.5, 0.5),glm::vec4(1.0f,1.0f,1.0f,1.0f)),
-		Vertex(glm::vec3( 0.5,-0.5, 0.5),glm::vec4(0.0f,0.0f,0.0f,1.0f))
+		Vertex(glm::vec3(-0.5, 0.5, 0.5),glm::vec4(1.0f,0.0f,0.0f,1.0f)),//1
+		Vertex(glm::vec3( 0.5, 0.5, 0.5),glm::vec4(0.0f,0.0f,1.0f,1.0f)),//2
+		Vertex(glm::vec3(-0.5, 0.5,-0.5),glm::vec4(0.0f,0.0f,1.0f,1.0f)),//3
+		Vertex(glm::vec3( 0.5, 0.5,-0.5),glm::vec4(1.0f,0.0f,0.0f,1.0f)),//4
+		Vertex(glm::vec3(-0.5,-0.5,-0.5),glm::vec4(1.0f,0.0f,0.0f,1.0f)),//5
+		Vertex(glm::vec3( 0.5,-0.5,-0.5),glm::vec4(0.0f,0.0f,1.0f,1.0f)),//6
+		Vertex(glm::vec3(-0.5,-0.5, 0.5),glm::vec4(0.0f,0.0f,1.0f,1.0f)),//7
+		Vertex(glm::vec3( 0.5,-0.5, 0.5),glm::vec4(1.0f,0.0f,0.0f,1.0f)) //8
 	};
 
 	Vertex vertices[4];
@@ -43,7 +43,7 @@ QuadRenderer::QuadRenderer(glm::vec3 Pos, glm::vec3 Dir)
 		vertices[1] = tempVerts[1];
 		vertices[2] = tempVerts[2];
 		vertices[3] = tempVerts[3];
-	}
+	}	
 	if (Dir == glm::vec3(0,-1,0)) {
 		vertices[0] = tempVerts[4];
 		vertices[1] = tempVerts[5];

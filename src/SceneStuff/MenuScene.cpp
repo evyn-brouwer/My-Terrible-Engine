@@ -62,7 +62,7 @@ void MenuScene::virtualUpdate(float dt)
 	myTestCamera->Rotate(rotation);
 	myTestCamera->Move(movement);
 
-	myTestCube->_transform._transformMat = myTestCube->_transform.rotate(glm::vec3(1.0f, 0.0, 0.0), 45.0f * dt);
+	//myTestCube->_transform._transformMat = myTestCube->_transform.rotate(glm::vec3(1.0f, 0.0, 0.0), 45.0f * dt);
 
 	myTestCube->draw();
 
