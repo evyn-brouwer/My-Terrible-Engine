@@ -112,6 +112,24 @@ void Shader::SetUniform(const char* name, const glm::mat4& value) {
 		glProgramUniformMatrix4fv(myShaderHandle, loc, 1, false, &value[0][0]);
 	}
 }
+void Shader::SetUniform(const char* name, const glm::mat3& value) {
+	GLint loc = glGetUniformLocation(myShaderHandle, name);
+	if (loc != -1) {
+		glProgramUniformMatrix3fv(myShaderHandle, loc, 1, false, &value[0][0]);
+	}
+}
+void Shader::SetUniform(const char* name, const glm::vec3& value) {
+	GLint loc = glGetUniformLocation(myShaderHandle, name);
+	if (loc != -1) {
+		glProgramUniform3fv(myShaderHandle, loc, 1, &value[0]);
+	}
+}
+void Shader::SetUniform(const char* name, const float& value) {
+	GLint loc = glGetUniformLocation(myShaderHandle, name);
+	if (loc != -1) {
+		glProgramUniform1fv(myShaderHandle, loc, 1, &value);
+	}
+}
 
 GLuint Shader::__CompileShaderPart(const char* source, GLenum type)
 {

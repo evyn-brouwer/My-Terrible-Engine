@@ -92,6 +92,8 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\RenderStuff\Camera.cpp" />
     <ClCompile Include="src\RenderStuff\Mesh.cpp" />
+    <ClCompile Include="src\RenderStuff\QuadRenderer.cpp" />
+    <ClCompile Include="src\RenderStuff\Structs.cpp" />
     <ClCompile Include="src\RenderStuff\Transform.cpp" />
     <ClCompile Include="src\SceneStuff\MenuScene.cpp" />
     <ClCompile Include="src\SceneStuff\Scene.cpp" />
