@@ -1,12 +1,8 @@
 #pragma once
 
 #include "Scene.h"
-#include "ShaderStuff/Shader.h"
-#include "RenderStuff/Mesh.h"
-#include "RenderStuff/Camera.h"
-#include "RenderStuff/Transform.h"
-#include "RenderStuff/QuadRenderer.h"
-#include "WorldStuff/Cube.h"
+#include "RenderStuff/Cube.h"
+#include "WorldStuff/Block.h"
 
 #include <glm/gtc/quaternion.hpp>
 
@@ -25,4 +21,5 @@ private:
 	Shader* myTestShader = NULL;;
 	Camera* myTestCamera = NULL;
 	Cube* myTestCube = NULL;
+	
 };

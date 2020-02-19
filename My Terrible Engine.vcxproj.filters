@@ -51,7 +51,13 @@
     <ClCompile Include="src\RenderStuff\Structs.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\WorldStuff\Cube.cpp">
+    <ClCompile Include="src\RenderStuff\Cube.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WorldStuff\Block.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WorldStuff\Blocks\BlockData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -86,7 +92,19 @@
     <ClInclude Include="src\RenderStuff\Transform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\WorldStuff\Cube.h">
+    <ClInclude Include="src\RenderStuff\Cube.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WorldStuff\Block.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WorldStuff\Blocks\BlockData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WorldStuff\WorldConstants.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
