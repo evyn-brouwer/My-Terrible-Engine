@@ -26,37 +26,37 @@ QuadRenderer::QuadRenderer(glm::vec3 Pos, glm::vec3 Dir)
 
 	Vertex vertices[4];
 
-	if (Dir == glm::vec3(1,0,0)) {
-		vertices[1]=tempVerts[1];
+	if (Dir == glm::vec3(1,0,0)) {//right
 		vertices[0]=tempVerts[3];
+		vertices[1]=tempVerts[1];
 		vertices[2]=tempVerts[5];
 		vertices[3]=tempVerts[7];
 	}
-	if (Dir == glm::vec3(-1,0,0)) {
-		vertices[1] = tempVerts[0];
-		vertices[0] = tempVerts[2];
-		vertices[2] = tempVerts[4];
-		vertices[3] = tempVerts[6];
+	if (Dir == glm::vec3(-1,0,0)) {//left
+		vertices[0] = tempVerts[0];
+		vertices[1] = tempVerts[2];
+		vertices[2] = tempVerts[6];
+		vertices[3] = tempVerts[4];
 	}
-	if (Dir == glm::vec3(0,1,0)) {
+	if (Dir == glm::vec3(0,1,0)) {//up
 		vertices[0] = tempVerts[0];
 		vertices[1] = tempVerts[1];
 		vertices[2] = tempVerts[2];
 		vertices[3] = tempVerts[3];
 	}	
-	if (Dir == glm::vec3(0,-1,0)) {
+	if (Dir == glm::vec3(0,-1,0)) {//down
 		vertices[0] = tempVerts[4];
 		vertices[1] = tempVerts[5];
 		vertices[2] = tempVerts[6];
 		vertices[3] = tempVerts[7];
 	}
-	if (Dir == glm::vec3(0,0,1)) {
-		vertices[0] = tempVerts[0];
-		vertices[1] = tempVerts[1];
-		vertices[2] = tempVerts[6];
-		vertices[3] = tempVerts[7];
+	if (Dir == glm::vec3(0,0,1)) {//screen
+		vertices[0] = tempVerts[1];
+		vertices[1] = tempVerts[0];
+		vertices[2] = tempVerts[7];
+		vertices[3] = tempVerts[6];
 	}
-	if (Dir == glm::vec3(0,0,-1)) {
+	if (Dir == glm::vec3(0,0,-1)) {//face
 		vertices[0] = tempVerts[2];
 		vertices[1] = tempVerts[3];
 		vertices[2] = tempVerts[4];

@@ -118,6 +118,7 @@
     <ClInclude Include="src\Types.h" />
     <ClInclude Include="src\WorldStuff\Block.h" />
     <ClInclude Include="src\WorldStuff\Blocks\BlockData.h" />
+    <ClInclude Include="src\WorldStuff\Chunk.h" />
     <ClInclude Include="src\WorldStuff\WorldConstants.h" />
   </ItemGroup>
   <ItemGroup>
