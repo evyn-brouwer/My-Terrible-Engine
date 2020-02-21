@@ -5,8 +5,9 @@
 class Chunk
 {
 public:
-	Chunk();
+	Chunk(Shader* shader, Camera* camera);
 
+	void draw();
 private:
-	Block* _blocks[CHUNK_VOLUME];
+	Cube* _blocks[CHUNK_SIZE][CHUNK_SIZE][CHUNK_SIZE];
 };

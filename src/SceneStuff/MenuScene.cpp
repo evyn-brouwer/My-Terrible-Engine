@@ -19,6 +19,8 @@ void MenuScene::loadData()
 	myTestCamera->Projection = glm::perspective(glm::radians(60.0f), 1600.0f/900.0f, 0.01f, 1000.0f);
 	
 	myTestCube = new Cube(myTestShader,myTestCamera,glm::vec3(0,0,0));
+
+	mytestChunk = new Chunk(myTestShader, myTestCamera);
 }
 
 void MenuScene::Resize(int Width, int Height)
@@ -66,4 +68,5 @@ void MenuScene::virtualUpdate(float dt)
 
 	myTestCube->draw();
 
+	mytestChunk->draw();
 }

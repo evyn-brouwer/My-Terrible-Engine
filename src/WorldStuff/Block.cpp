@@ -7,7 +7,7 @@ Block::Block(Shader* shader, Camera* camera, glm::vec3 position, std::string nam
 
 void Block::update(float dt)
 {
-	virtualUpdate(dt);
+	//virtualUpdate(dt);
 	
 }
 

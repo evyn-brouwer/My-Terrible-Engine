@@ -18,7 +18,7 @@ Mesh::Mesh(Vertex* vertices, size_t numVerts, uint32_t* indices, size_t numIndic
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, numIndices * sizeof(uint32_t), indices, GL_STATIC_DRAW);
 
 	//Get a null vertex to get member offsets from
-		Vertex* vert = new Vertex;
+		Vertex* vert = NULL;
 	// Enable vertex attribute 0
 	glEnableVertexAttribArray(0);
 	// Our first attribute is 3 floats, the distance between
@@ -32,7 +32,6 @@ Mesh::Mesh(Vertex* vertices, size_t numVerts, uint32_t* indices, size_t numIndic
 
 	// Unbind our VAO
 	glBindVertexArray(0);
-	delete vert;
 }
 
 Mesh::~Mesh()

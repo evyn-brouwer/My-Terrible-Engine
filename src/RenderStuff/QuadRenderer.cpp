@@ -76,7 +76,7 @@ QuadRenderer::QuadRenderer(glm::vec3 Pos, glm::vec3 Dir)
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(uint32_t), indices, GL_STATIC_DRAW);
 
 	//Get a null vertex to get member offsets from
-	Vertex* vert = new Vertex;
+	Vertex* vert =NULL;
 	// Enable vertex attribute 0
 	glEnableVertexAttribArray(0);
 	// Our first attribute is 3 floats, the distance between
@@ -90,7 +90,6 @@ QuadRenderer::QuadRenderer(glm::vec3 Pos, glm::vec3 Dir)
 
 	// Unbind our VAO
 	glBindVertexArray(0);
-	delete vert;
 }
 
 void QuadRenderer::draw()

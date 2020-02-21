@@ -3,6 +3,7 @@
 #include "Scene.h"
 #include "RenderStuff/Cube.h"
 #include "WorldStuff/Block.h"
+#include "WorldStuff/Chunk.h"
 
 #include <glm/gtc/quaternion.hpp>
 
@@ -21,5 +22,5 @@ private:
 	Shader* myTestShader = NULL;;
 	Camera* myTestCamera = NULL;
 	Cube* myTestCube = NULL;
-	
+	Chunk* mytestChunk = NULL;
 };
