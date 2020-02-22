@@ -3,7 +3,10 @@
 
 void GlfwWindowResizedCallback(GLFWwindow* window, int width, int height) {
 	glViewport(0, 0, width, height);
-	
+	Game* myGame = (Game*)glfwGetWindowUserPointer(window);
+	if (myGame) {
+		myGame->Resize(width, height);
+	}
 }
 
 Game::Game(std::string gameName, GLuint width, GLuint height)
@@ -66,7 +69,6 @@ void Game::runGame()
 		
 
 		glfwSwapBuffers(_gameWindow);
-		
 	}
 
 }

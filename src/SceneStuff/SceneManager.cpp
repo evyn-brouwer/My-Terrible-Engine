@@ -4,6 +4,12 @@ SceneManager::SceneManager()
 {
 }
 
+SceneManager::~SceneManager()
+{
+	for (unsigned i = 0; i < _scenes.size(); i++)
+		delete _scenes[i];
+}
+
 void SceneManager::update(float dt)
 {
 	bool sceneRan = false;
