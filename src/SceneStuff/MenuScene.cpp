@@ -61,8 +61,8 @@ void MenuScene::virtualUpdate(float dt)
 	if (glfwGetKey(_gameWindow, GLFW_KEY_RIGHT) == GLFW_PRESS)
 		rotation.y += rotSpeed * dt;
 	if (glfwGetKey(_gameWindow, GLFW_KEY_P) == GLFW_PRESS) {
-		changeScene = true;
-		_newSceneName = "TestScene";
+		_changeScene = true;
+		_newSceneName = "BadScene";
 	}
 		
 

@@ -7,5 +7,6 @@ Scene::Scene(GLFWwindow* window, std::string sceneName)
 
 void Scene::update(float dt)
 {
+	
 	virtualUpdate(dt);
 }
