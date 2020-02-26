@@ -9,12 +9,12 @@ class SceneManager
 {
 public:
 	SceneManager();
-	~SceneManager();
 	void update(float dt);
 
-	void addScene(Scene* newScene) { _scenes.push_back(newScene); }
+	void addScene(std::shared_ptr<Scene> newScene) { _scenes.push_back(newScene); }
 
-	std::vector<Scene*> _scenes;
+	std::shared_ptr<Scene> _currentScene;
+	std::vector<std::shared_ptr<Scene>> _scenes;
 private:
 
 

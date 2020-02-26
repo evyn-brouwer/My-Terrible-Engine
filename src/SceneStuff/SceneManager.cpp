@@ -1,62 +1,49 @@
 #include "SceneManager.h"
 
 SceneManager::SceneManager()
+:_currentScene(NULL)
 {
-}
-
-SceneManager::~SceneManager()
-{
-	for (unsigned i = 0; i < _scenes.size(); i++)
-		delete _scenes[i];
 }
 
 void SceneManager::update(float dt)
 {
-	bool sceneRan = false;
-	for (auto x : _scenes) {
-		if (x->active) {
-			if (x->changeScene) {
-				if (x->newSceneName != "") {
-					for (unsigned i = 0; i < _scenes.size(); i++) {
-						if (_scenes[i]->_sceneName == x->newSceneName) {
-							if (x != _scenes[i]) {
-								_scenes[i]->active = true;
-								_scenes[i]->update(dt);
-								sceneRan = true;
-							}
-							else
-							{
-								std::cout << x->_sceneName << " is trying to swap to itself!" << std::endl;
-							}
+	if (_currentScene != NULL) {//if there is a scene active
+		if (!_currentScene->changeScene) {//if the current scene doesn't want to change
+			_currentScene->update(dt);//update the scene
+		}
+		else {//if the current scene wants to change
+			if (_currentScene->_newSceneName != _currentScene->_sceneName) {//if the scenes to change to is not this scene
+				if (_currentScene->_newSceneName!="") {
+					for (unsigned i = 0; i < _scenes.size(); i++) {//check all the scenes
+						if (_currentScene->_newSceneName == _scenes[i]->_sceneName) {
+							_currentScene->_newSceneName = "";
+							_currentScene->changeScene = false;
+							_currentScene = _scenes[i];
+							_currentScene->changeScene = false;
+							_currentScene->_newSceneName = "";
+							_currentScene->update(dt);
 						}
-						else if (i==_scenes.size()) {
-							std::cout << "There is no " << x->newSceneName << " Scene!"<<std::endl;
+						else if (i == _scenes.size()) {
+							_currentScene->update(dt);
+							std::cout << "There is no " << _currentScene->_newSceneName << " Scene!" << std::endl;
 						}
 					}
-						
-					 
+				
 				}
 				else {
-					x->changeScene = false;
-					std::cout << x->_sceneName << " wants to change scene, but doesn't know to what scene!" << std::endl;
+					std::cout << _currentScene->_sceneName << " wants to change scene, but doesn't know to what scene!" << std::endl;
+					_currentScene->changeScene = false;
 				}
-				x->active = false;
-				x->newSceneName = "";
 			}
 			else {
-				x->update(dt);
-				if (sceneRan) {
-					for(auto y : _scenes)
-						if (y->active) {
-							std::cout << y->_sceneName << " and " << x->_sceneName << " are both active at the same time!" << std::endl;
-							break;
-						}
-				}
-				sceneRan = true;
+				std::cout << _currentScene->_sceneName << " is trying to swap to itself!" << std::endl;
+				_currentScene->changeScene = false;
+				_currentScene->_newSceneName = "";
 			}
-				
+			
 		}
 	}
-	if (!sceneRan)
-		std::cout<<"No scene is active!"<<std::endl;
+	else {//if the current scene is NULL
+		std::cout << "There is no active Scene!" <<std::endl;
+	}
 }

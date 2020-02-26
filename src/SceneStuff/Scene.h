@@ -13,12 +13,10 @@ public:
 
 	void update(float dt);
 	
-
-	bool active = false;
 	std::string _sceneName = "";
 
 	bool changeScene = false;
-	std::string newSceneName = "";
+	std::string _newSceneName = "";
 
 	GLFWwindow* _gameWindow;
 	

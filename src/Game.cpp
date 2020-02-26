@@ -13,12 +13,11 @@ Game::Game(std::string gameName, GLuint width, GLuint height)
 	: _gameName(gameName),_width(width),_height(height)
 {
 	_gameWindow = NULL;
-	_sceneManager = new SceneManager();
+	_sceneManager = std::make_shared<SceneManager>();
 }
 
 Game::~Game()
 {
-	delete _sceneManager;
 }
 
 void Game::init()
@@ -42,8 +41,11 @@ void Game::init()
 	std::cout << glGetString(GL_RENDERER) << std::endl;
 	std::cout << glGetString(GL_VERSION) << std::endl;
 
-	MenuScene* menuScene = new MenuScene(_gameWindow,"MenuScene");
-	menuScene->active = true;
+	std::shared_ptr<MenuScene> menuScene = std::make_shared<MenuScene>(_gameWindow,"MenuScene");
+	_sceneManager->addScene(menuScene);
+	_sceneManager->_currentScene = menuScene;
+
+	std::shared_ptr<TestScene> testScene = std::make_shared<TestScene>(_gameWindow, "TestScene");
 	_sceneManager->addScene(menuScene);
 
 	glEnable(GL_DEPTH_TEST);

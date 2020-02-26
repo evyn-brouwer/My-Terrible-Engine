@@ -98,6 +98,7 @@
     <ClCompile Include="src\SceneStuff\MenuScene.cpp" />
     <ClCompile Include="src\SceneStuff\Scene.cpp" />
     <ClCompile Include="src\SceneStuff\SceneManager.cpp" />
+    <ClCompile Include="src\SceneStuff\TestScene.cpp" />
     <ClCompile Include="src\ShaderStuff\Shader.cpp" />
     <ClCompile Include="src\RenderStuff\Cube.cpp" />
     <ClCompile Include="src\WorldStuff\Block.cpp" />
@@ -114,6 +115,7 @@
     <ClInclude Include="src\SceneStuff\Scene.h" />
     <ClInclude Include="src\SceneStuff\SceneManager.h" />
     <ClInclude Include="src\SceneStuff\MenuScene.h" />
+    <ClInclude Include="src\SceneStuff\TestScene.h" />
     <ClInclude Include="src\ShaderStuff\Shader.h" />
     <ClInclude Include="src\RenderStuff\Cube.h" />
     <ClInclude Include="src\Types.h" />

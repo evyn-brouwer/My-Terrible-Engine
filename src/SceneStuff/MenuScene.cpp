@@ -60,6 +60,11 @@ void MenuScene::virtualUpdate(float dt)
 		rotation.y -= rotSpeed * dt;
 	if (glfwGetKey(_gameWindow, GLFW_KEY_RIGHT) == GLFW_PRESS)
 		rotation.y += rotSpeed * dt;
+	if (glfwGetKey(_gameWindow, GLFW_KEY_P) == GLFW_PRESS) {
+		changeScene = true;
+		_newSceneName = "TestScene";
+	}
+		
 
 	myTestCamera->Rotate(rotation);
 	myTestCamera->Move(movement);

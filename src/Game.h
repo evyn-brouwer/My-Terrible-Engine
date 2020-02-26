@@ -6,10 +6,12 @@
 
 #include <string>
 #include<iostream>
+#include <memory>
 
 #include "SceneStuff/SceneManager.h"
 
 #include "SceneStuff/MenuScene.h"
+#include "SceneStuff/TestScene.h"
 
 class Game
 {
@@ -29,5 +31,5 @@ private:
 
 	GLFWwindow* _gameWindow;
 
-	SceneManager* _sceneManager;
+	std::shared_ptr<SceneManager> _sceneManager;
 };

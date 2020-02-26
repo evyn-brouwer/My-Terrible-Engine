@@ -1,6 +1,6 @@
 
 #include "Game.h"
-
+#include <memory>
 
 //lets us use the gpu
 extern "C" {
@@ -10,15 +10,14 @@ extern "C" {
 
 int main()
 {
-	Game* myGame = new Game("Evyn's Terrible Game",1600,900);
-
+	//Game* myGame = new Game("Evyn's Terrible Game",1600,900);
+	std::shared_ptr<Game> myGame = std::make_shared<Game>("Evyn's Terrible Game", 1600, 900);
 	
 	myGame->init();
 
 	myGame->runGame();
 
 	std::cout<< "Game has exited!" <<std::endl;
-	delete myGame;
 
 
 	return 0;
