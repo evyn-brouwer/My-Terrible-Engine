@@ -9,18 +9,18 @@ MenuScene::MenuScene(GLFWwindow* window, std::string sceneName)
 
 void MenuScene::loadData()
 {
-	myTestShader = new Shader();
+	myTestShader = std::make_shared<Shader>();
 	myTestShader->Load("./Assets/Shaders/testShader.vs","./Assets/Shaders/testShader.fs");
 
 
-	myTestCamera = new Camera();
+	myTestCamera = std::make_shared<Camera>();
 	myTestCamera->SetPosition(glm::vec3(5, 5, 5));
 	myTestCamera->LookAt(glm::vec3(0));
 	myTestCamera->Projection = glm::perspective(glm::radians(60.0f), 1600.0f/900.0f, 0.01f, 1000.0f);
 	
-	myTestCube = new Cube(myTestShader,myTestCamera,glm::vec3(0,0,0));
+	myTestCube = std::make_shared<Cube>(myTestShader,myTestCamera,glm::vec3(0,0,0));
 
-	mytestChunk = new Chunk(myTestShader, myTestCamera);
+	mytestChunk = std::make_shared<Chunk>(myTestShader, myTestCamera);
 }
 
 void MenuScene::Resize(int Width, int Height)
@@ -62,7 +62,7 @@ void MenuScene::virtualUpdate(float dt)
 		rotation.y += rotSpeed * dt;
 	if (glfwGetKey(_gameWindow, GLFW_KEY_P) == GLFW_PRESS) {
 		_changeScene = true;
-		_newSceneName = "BadScene";
+		_newSceneName = "TestScene";
 	}
 		
 

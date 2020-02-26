@@ -7,6 +7,8 @@
 
 #include <glm/gtc/quaternion.hpp>
 
+#include <memory>
+
 class MenuScene : public Scene
 {
 public:
@@ -19,8 +21,8 @@ private:
 
 	virtual void virtualUpdate(float dt)override;
 
-	Shader* myTestShader = NULL;;
-	Camera* myTestCamera = NULL;
-	Cube* myTestCube = NULL;
-	Chunk* mytestChunk = NULL;
+	std::shared_ptr<Shader> myTestShader = NULL;;
+	std::shared_ptr<Camera> myTestCamera = NULL;
+	std::shared_ptr<Cube> myTestCube = NULL;
+	std::shared_ptr<Chunk> mytestChunk = NULL;
 };

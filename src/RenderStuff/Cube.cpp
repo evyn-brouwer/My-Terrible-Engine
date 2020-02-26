@@ -1,6 +1,6 @@
 #include "Cube.h"
 
-Cube::Cube(Shader* shader, Camera* camera, glm::vec3 position)
+Cube::Cube(std::shared_ptr<Shader> shader, std::shared_ptr<Camera> camera, glm::vec3 position)
 	: _shader(shader),_camera(camera),_position(position)
 {
 	

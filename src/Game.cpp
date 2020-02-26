@@ -46,7 +46,7 @@ void Game::init()
 	_sceneManager->_currentScene = menuScene;
 
 	std::shared_ptr<TestScene> testScene = std::make_shared<TestScene>(_gameWindow, "TestScene");
-	_sceneManager->addScene(menuScene);
+	_sceneManager->addScene(testScene);
 
 	glEnable(GL_DEPTH_TEST);
 

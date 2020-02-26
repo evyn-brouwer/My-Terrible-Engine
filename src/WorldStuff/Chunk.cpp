@@ -1,6 +1,6 @@
 #include "Chunk.h"
 
-Chunk::Chunk(Shader* shader, Camera* camera)
+Chunk::Chunk(std::shared_ptr<Shader> shader, std::shared_ptr<Camera> camera)
 {
 	for (unsigned i = 0; i < CHUNK_SIZE; i++)
 		for (unsigned n = 0; n < CHUNK_SIZE; n++)
