@@ -103,6 +103,12 @@ void mte::Game::runGame()
 		glfwSwapBuffers(_gameWindow);
 
 		glfwPollEvents(); 
+		Error temp;
+		temp._errorSeverity = mte::ErrorSeverityLevel::good;
+		temp._errorLocation = "Game.cpp";
+		temp._errorMessage = "This is a test error";
+		
+		_logger.sendError(temp);
 		_logger.printErrors();
 	}
 
