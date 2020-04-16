@@ -4,27 +4,34 @@
 #include <glfw/glfw3.h>
 #include <glm/glm.hpp>
 
+#include "Input/InputHandler.h"
+
 #include <string>
+namespace mte {
 
-class Scene
-{
-public:
-	Scene(GLFWwindow* window, std::string sceneName);
+	class Scene
+	{
+	public:
+		Scene(GLFWwindow* window, std::string sceneName);
 
-	void update(float dt);
-	
-	std::string _sceneName = "";
+		void update(float dt);
 
-	bool _changeScene = false;
-	std::string _newSceneName = "";
+		std::string _sceneName = "";
 
-	GLFWwindow* _gameWindow;
-	
-	virtual void Resize(int width,int height)=0;
+		bool _changeScene = false;
+		std::string _newSceneName = "";
 
-private:
+		GLFWwindow* _gameWindow;
 
-	
+		InputHandler _input;
 
-	virtual void virtualUpdate(float dt) = 0;
-};
+		virtual void Resize(int width, int height) = 0;
+
+	private:
+
+
+
+		virtual void virtualUpdate(float dt) = 0;
+	};
+
+}

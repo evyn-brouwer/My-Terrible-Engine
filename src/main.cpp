@@ -11,14 +11,12 @@ extern "C" {
 int main()
 {
 	//Game* myGame = new Game("Evyn's Terrible Game",1600,900);
-	std::shared_ptr<Game> myGame = std::make_shared<Game>("Evyn's Terrible Game", 1600, 900);
+	std::shared_ptr<mte::Game> myGame = std::make_shared<mte::Game>("Evyn's Terrible Game", 1600, 900);
 	
-	myGame->init();
-
 	myGame->runGame();
 
 	std::cout<< "Game has exited!" <<std::endl;
 
-
+	//system("PAUSE");//REMOVE
 	return 0;
 }

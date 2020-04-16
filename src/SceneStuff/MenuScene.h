@@ -9,7 +9,7 @@
 
 #include <memory>
 
-class MenuScene : public Scene
+class MenuScene : public mte::Scene
 {
 public:
 	MenuScene(GLFWwindow* window, std::string sceneName);

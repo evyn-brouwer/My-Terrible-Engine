@@ -1,11 +1,11 @@
 #include "Scene.h"
 
-Scene::Scene(GLFWwindow* window, std::string sceneName)
+mte::Scene::Scene(GLFWwindow* window, std::string sceneName)
 	:_gameWindow(window),_sceneName(sceneName)
 {
 }
 
-void Scene::update(float dt)
+void mte::Scene::update(float dt)
 {
 	
 	virtualUpdate(dt);

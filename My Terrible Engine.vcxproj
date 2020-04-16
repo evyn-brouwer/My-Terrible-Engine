@@ -89,6 +89,8 @@
   <ItemGroup>
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\glad.c" />
+    <ClCompile Include="src\Input\InputHandler.cpp" />
+    <ClCompile Include="src\Logging\Logger.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\RenderStuff\Camera.cpp" />
     <ClCompile Include="src\RenderStuff\Mesh.cpp" />
@@ -107,6 +109,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Game.h" />
+    <ClInclude Include="src\Input\InputHandler.h" />
+    <ClInclude Include="src\Logging\Logger.h" />
     <ClInclude Include="src\RenderStuff\Camera.h" />
     <ClInclude Include="src\RenderStuff\Mesh.h" />
     <ClInclude Include="src\RenderStuff\QuadRenderer.h" />

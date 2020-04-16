@@ -9,27 +9,39 @@
 #include <memory>
 
 #include "SceneStuff/SceneManager.h"
+#include "Logging/Logger.h"
 
 #include "SceneStuff/MenuScene.h"
-#include "SceneStuff/TestScene.h"
+#include "SceneStuff/TestScene.h" 
 
-class Game
-{
-public:
-	Game(std::string gameName,GLuint width,GLuint height);
 
-	~Game();
 
-	void init();
-	void runGame();
+namespace mte {
 
-	void Resize(GLuint width, GLuint height);
-private:
+	class Game
+	{
+	public:
+		Game(std::string gameName, GLuint width, GLuint height);
 
-	GLuint _width, _height;
-	std::string _gameName;
+		~Game();
 
-	GLFWwindow* _gameWindow;
 
-	std::shared_ptr<SceneManager> _sceneManager;
-};
+		void runGame();
+
+		void Resize(GLuint width, GLuint height);
+
+		InputHandler _input;
+		Logger _logger;
+	private:
+		bool init();
+
+
+		
+		GLint _width, _height;
+		std::string _gameName;
+
+		GLFWwindow* _gameWindow;
+
+		std::shared_ptr<SceneManager> _sceneManager;
+	};
+}

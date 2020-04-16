@@ -2,7 +2,7 @@
 #include "Scene.h"
 #include <iostream>
 
-class TestScene : public Scene
+class TestScene : public mte::Scene
 {
 public:
 	TestScene(GLFWwindow* window, std::string sceneName);

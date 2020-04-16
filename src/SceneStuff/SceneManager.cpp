@@ -1,11 +1,11 @@
 #include "SceneManager.h"
 
-SceneManager::SceneManager()
+mte::SceneManager::SceneManager()
 :_currentScene(NULL)
 {
 }
 
-void SceneManager::update(float dt)
+void mte::SceneManager::update(float dt)
 {
 	if (_currentScene != NULL) {//if there is a scene active
 		if (!_currentScene->_changeScene) {//if the current scene doesn't want to change
