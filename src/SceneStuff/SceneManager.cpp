@@ -26,7 +26,11 @@ void mte::SceneManager::update(float dt)
 						else if (i == _scenes.size() - 1) {
 							_currentScene->update(dt);
 							_currentScene->_changeScene = false;
-							std::cout << "There is no " << _currentScene->_newSceneName << " Scene!" << std::endl;
+							Error error;
+							error._errorLocation = "SceneManager.cpp";
+							error._errorMessage = "There is no " + _currentScene->_newSceneName + " Scene!";
+							error._errorSeverity = mte::ErrorSeverityLevel::bad;
+							_logger.sendError(error);
 							_currentScene->_newSceneName = "";
 						}
 					}
@@ -34,12 +38,20 @@ void mte::SceneManager::update(float dt)
 				}
 				else {
 					_currentScene->update(dt);
-					std::cout << _currentScene->_sceneName << " wants to change scene, but doesn't know to what scene to change to!" << std::endl;
+					Error error;
+					error._errorLocation = "SceneManager.cpp";
+					error._errorMessage = _currentScene->_sceneName + " wants to change scene, but doesn't know to what scene to change to!";
+					error._errorSeverity = mte::ErrorSeverityLevel::bad;
+					_logger.sendError(error);
 					_currentScene->_changeScene = false;
 				}
 			}
 			else {
-				std::cout << _currentScene->_sceneName << " is trying to swap to itself!" << std::endl;
+				Error error;
+				error._errorLocation = "SceneManager.cpp";
+				error._errorMessage = _currentScene->_sceneName + " is trying to swap to itself!";
+				error._errorSeverity = mte::ErrorSeverityLevel::bad;
+				_logger.sendError(error);
 				_currentScene->_changeScene = false;
 				_currentScene->_newSceneName = "";
 				_currentScene->update(dt);
@@ -48,6 +60,10 @@ void mte::SceneManager::update(float dt)
 		}
 	}
 	else {//if the current scene is NULL
-		std::cout << "There is no active Scene!" <<std::endl;
+		Error error;
+		error._errorLocation = "SceneManager.cpp";
+		error._errorMessage = "There is no active Scene!";
+		error._errorSeverity = mte::ErrorSeverityLevel::severe;
+		_logger.sendError(error);
 	}
 }

@@ -4,6 +4,7 @@
 
 #include <vector>
 #include <iostream>
+#include "Logging/Logger.h"
 
 namespace mte {
 	class SceneManager
@@ -16,8 +17,9 @@ namespace mte {
 
 		std::shared_ptr<Scene> _currentScene;
 		std::vector<std::shared_ptr<Scene>> _scenes;
+		
 	private:
-
+		Logger _logger;
 
 
 

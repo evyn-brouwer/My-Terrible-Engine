@@ -47,6 +47,7 @@
     <OutDir>$(SolutionDir)build\debug\</OutDir>
     <IncludePath>$(ProjectDir)external;$(ProjectDir)external\GLEW\include;$(ProjectDir)external\SFML-2.5.1\include;$(ProjectDir)external\include;$(ProjectDir)external\GLM\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)external\lib;$(ProjectDir)external\GLEW\lib;$(ProjectDir)external\SFML-2.5.1\lib;$(LibraryPath)</LibraryPath>
+    <IntDir>$(SolutionDir)build-int\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>

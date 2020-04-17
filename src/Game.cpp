@@ -3,7 +3,8 @@
 
 void GlfwWindowResizedCallback(GLFWwindow* window, int width, int height) {
 	glViewport(0, 0, width, height);
-	mte::Game* myGame = (mte::Game*)glfwGetWindowUserPointer(window);
+	mte::Game* myGame = (mte::Game*)glfwGetWindowUserPointer(window);//TODO doesn't work
+	
 	if (myGame) {
 		myGame->Resize(width, height);
 	}
@@ -43,13 +44,21 @@ bool mte::Game::init()
 
 	// Initialize GLFW
 	if (!glfwInit() ) {
-		std::cout << "Failed to initialize Glad" << std::endl;
+		Error error;
+		error._errorLocation = "Game.cpp";
+		error._errorMessage = "Failed to initialize GLFW";
+		error._errorSeverity = mte::ErrorSeverityLevel::gameCrashing;
+		_logger.sendError(error);
 		return false;
 	}
 	_gameWindow = glfwCreateWindow(_width, _height, _gameName.c_str(), nullptr, nullptr);
 
 	if (!_gameWindow) {
-		std::cout << "Failed to create Game Window" << std::endl;
+		Error error;
+		error._errorLocation = "Game.cpp";
+		error._errorMessage = "Failed to create Game Window";
+		error._errorSeverity = mte::ErrorSeverityLevel::gameCrashing;
+		_logger.sendError(error);
 		return false;
 	}
 	glfwSetWindowSizeCallback(_gameWindow, GlfwWindowResizedCallback);
@@ -60,7 +69,11 @@ bool mte::Game::init()
 	glfwMakeContextCurrent(_gameWindow);
 
 	if (gladLoadGLLoader((GLADloadproc)glfwGetProcAddress) == 0) {
-		std::cout << "Failed to initialize Glad" << std::endl;
+		Error error;
+		error._errorLocation = "Game.cpp";
+		error._errorMessage = "Failed to initialize Glad";
+		error._errorSeverity = mte::ErrorSeverityLevel::gameCrashing;
+		_logger.sendError(error); 
 		return false;
 	}
 
@@ -77,8 +90,11 @@ bool mte::Game::init()
 
 	glEnable(GL_DEPTH_TEST);
 
-
-	std::cout << "Game has been initialized!" << std::endl;
+	Error error;
+	error._errorLocation = "Game.cpp";
+	error._errorMessage = "Game has been initialized!";
+	error._errorSeverity = mte::ErrorSeverityLevel::great;
+	_logger.sendError(error);
 	return true;
 }
 
@@ -103,12 +119,7 @@ void mte::Game::runGame()
 		glfwSwapBuffers(_gameWindow);
 
 		glfwPollEvents(); 
-		Error temp;
-		temp._errorSeverity = mte::ErrorSeverityLevel::good;
-		temp._errorLocation = "Game.cpp";
-		temp._errorMessage = "This is a test error";
-		
-		_logger.sendError(temp);
+
 		_logger.printErrors();
 	}
 

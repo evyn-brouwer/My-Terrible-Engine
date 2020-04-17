@@ -2,6 +2,8 @@
 #include <glfw/glfw3.h>
 #include <glm/glm.hpp>
 
+#include "Logging/Logger.h"
+
 namespace mte {
 
 	class InputHandler {
@@ -27,6 +29,7 @@ namespace mte {
 		static bool _keylist[1024];
 		static bool _mouseButtonList[32];
 		static double _mouseX, _mouseY;
+		Logger _logger;
 	};
 
 }

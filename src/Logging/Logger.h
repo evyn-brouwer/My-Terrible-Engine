@@ -9,13 +9,13 @@ namespace mte {
 	
 	enum class ErrorSeverityLevel
 	{
-		normal = 7,//white 7 or 15
+		normal = 15,//white 7 or 15
 		bad = 14,//yellow 14
 		severe=6,//orange
-		gameCrashing=4,//red 4 or 12
-		good=2,//green 2 or 10
-		great=3,//blue 3 or 11
-		other=5,//purple 4 or 13
+		gameCrashing=12,//red 4 or 12
+		good=10,//green 2 or 10
+		great=11,//blue 3 or 11
+		other=13,//purple 4 or 13
 		boring=8, //gray 8
 	};
 
