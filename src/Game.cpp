@@ -1,5 +1,7 @@
 #include "Game.h"
 
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
 
 void GlfwWindowResizedCallback(GLFWwindow* window, int width, int height) {
 	glViewport(0, 0, width, height);

@@ -17,9 +17,9 @@ namespace mte {
 
 	private:
 
-		GLuint _VAO;
-		GLuint _buffers[2];
-		size_t _vertexCount, _indexCount;
+		GLuint _VAO = 0;
+		GLuint _buffers[2]{0,0};
+		size_t _vertexCount = 0, _indexCount = 0;
 
 	};
 

@@ -109,6 +109,7 @@
     <ClCompile Include="src\WorldStuff\Chunk.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="external\stb_image.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\Input\InputHandler.h" />
     <ClInclude Include="src\Logging\Logger.h" />
@@ -131,6 +132,8 @@
     <ClInclude Include="src\WorldStuff\WorldConstants.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Shaders\simplestShader.fs" />
+    <None Include="Assets\Shaders\simplestShader.vs" />
     <None Include="Assets\Shaders\testShader.fs" />
     <None Include="Assets\Shaders\testShader.vs" />
   </ItemGroup>

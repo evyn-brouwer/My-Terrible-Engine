@@ -134,9 +134,14 @@
     <ClInclude Include="src\RenderStuff\ShaderStuff\Shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="external\stb_image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\testShader.vs" />
     <None Include="Assets\Shaders\testShader.fs" />
+    <None Include="Assets\Shaders\simplestShader.vs" />
+    <None Include="Assets\Shaders\simplestShader.fs" />
   </ItemGroup>
 </Project>
