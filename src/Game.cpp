@@ -3,14 +3,15 @@
 
 void GlfwWindowResizedCallback(GLFWwindow* window, int width, int height) {
 	glViewport(0, 0, width, height);
-	mte::Game* myGame = (mte::Game*)glfwGetWindowUserPointer(window);//TODO doesn't work
+
+	mte::Game* myGame = reinterpret_cast<mte::Game*>(glfwGetWindowUserPointer(window));//TODO doesn't work
 	
 	if (myGame) {
 		myGame->Resize(width, height);
 	}
 }
 
-void GLFW_key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+static void GLFW_key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
 	mte::Game* myGame = (mte::Game*)glfwGetWindowUserPointer(window);
 	if (myGame) {
 		myGame->_input.key_callback(window,key,scancode,action,mods);
@@ -26,13 +27,16 @@ static void cursor_position_callback(GLFWwindow* window, double xpos, double ypo
 }
 
 mte::Game::Game(std::string gameName, GLuint width, GLuint height)
-	: _gameName(gameName),_width(width),_height(height)
+	: _gameName(gameName)
 {
+	_width = width;
+	_height = height;
 	_gameWindow = NULL;
 	_sceneManager = std::make_shared<SceneManager>();
 	if (!init())
 		glfwTerminate();
 }
+
 
 mte::Game::~Game()
 {
@@ -61,6 +65,7 @@ bool mte::Game::init()
 		_logger.sendError(error);
 		return false;
 	}
+	glfwSetWindowUserPointer(_gameWindow,this);
 	glfwSetWindowSizeCallback(_gameWindow, GlfwWindowResizedCallback);
 	glfwSetKeyCallback(_gameWindow, GLFW_key_callback);
 	glfwSetCursorPosCallback(_gameWindow, cursor_position_callback);
@@ -83,10 +88,11 @@ bool mte::Game::init()
 
 	std::shared_ptr<MenuScene> menuScene = std::make_shared<MenuScene>(_gameWindow,"MenuScene");
 	_sceneManager->addScene(menuScene);
-	_sceneManager->_currentScene = menuScene;
+	//_sceneManager->_currentScene = menuScene;
 
 	std::shared_ptr<TestScene> testScene = std::make_shared<TestScene>(_gameWindow, "TestScene");
 	_sceneManager->addScene(testScene);
+	_sceneManager->_currentScene = testScene;
 
 	glEnable(GL_DEPTH_TEST);
 
@@ -132,3 +138,7 @@ void mte::Game::Resize(GLuint width, GLuint height)
 	for (auto x : _sceneManager->_scenes)
 		x->Resize(width,height);
 }
+
+
+GLint mte::Game::_height = 0;
+GLint mte::Game::_width = 0;

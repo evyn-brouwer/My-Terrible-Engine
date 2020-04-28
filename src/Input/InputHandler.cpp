@@ -2,16 +2,12 @@
 
 void mte::InputHandler::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-	if (action == GLFW_PRESS)
+	if (action == GLFW_PRESS) {
 		_keylist[key] = true;
-	else if (action == GLFW_RELEASE)
+	}
+	else if (action == GLFW_RELEASE) {
 		_keylist[key] = false;
-	Error error;
-	error._errorLocation = "InputHandler.cpp";
-	error._errorMessage = "Keyboard Input";
-	error._errorSeverity = mte::ErrorSeverityLevel::other;
-	_logger.sendError(error);
-	_logger.sendError(error);
+	}
 }
 
 void mte::InputHandler::cursor_postion_callback(GLFWwindow* window, double xPos, double yPos)

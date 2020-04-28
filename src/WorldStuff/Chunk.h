@@ -5,7 +5,7 @@
 class Chunk
 {
 public:
-	Chunk(std::shared_ptr<Shader> shader, std::shared_ptr<Camera> camera);
+	Chunk(std::shared_ptr<mte::Shader> shader, std::shared_ptr<Camera> camera);
 
 	void draw();
 private:

@@ -22,7 +22,7 @@ namespace mte {
 	{
 	public:
 		Game(std::string gameName, GLuint width, GLuint height);
-
+		
 		~Game();
 
 
@@ -37,7 +37,7 @@ namespace mte {
 
 
 		
-		GLint _width, _height;
+		static GLint _width, _height;
 		std::string _gameName;
 
 		GLFWwindow* _gameWindow;

@@ -9,7 +9,7 @@ MenuScene::MenuScene(GLFWwindow* window, std::string sceneName)
 
 void MenuScene::loadData()
 {
-	myTestShader = std::make_shared<Shader>();
+	myTestShader = std::make_shared<mte::Shader>();
 	myTestShader->Load("./Assets/Shaders/testShader.vs","./Assets/Shaders/testShader.fs");
 
 
@@ -34,33 +34,32 @@ void MenuScene::virtualUpdate(float dt)
 	glm::vec3 rotation = glm::vec3(0.0f);
 	float speed = 1.0f;
 	float rotSpeed = 1.0f;
-
-	if (glfwGetKey(_gameWindow, GLFW_KEY_W) == GLFW_PRESS)
+	if(_input.getKeyState(GLFW_KEY_W))
 		movement.z -= speed * dt;
-	if (glfwGetKey(_gameWindow, GLFW_KEY_S) == GLFW_PRESS)
+	if (_input.getKeyState(GLFW_KEY_S))
 		movement.z += speed * dt;
-	if (glfwGetKey(_gameWindow, GLFW_KEY_A) == GLFW_PRESS)
+	if (_input.getKeyState(GLFW_KEY_A))
 		movement.x -= speed * dt;
-	if (glfwGetKey(_gameWindow, GLFW_KEY_D) == GLFW_PRESS)
+	if (_input.getKeyState(GLFW_KEY_D))
 		movement.x += speed * dt;
-	if (glfwGetKey(_gameWindow, GLFW_KEY_SPACE) == GLFW_PRESS)
+	if (_input.getKeyState(GLFW_KEY_SPACE))
 		movement.y += speed * dt;
-	if (glfwGetKey(_gameWindow, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS)
+	if (_input.getKeyState(GLFW_KEY_LEFT_CONTROL))
 		movement.y -= speed * dt;
 
-	if (glfwGetKey(_gameWindow, GLFW_KEY_Q) == GLFW_PRESS)
+	if (_input.getKeyState(GLFW_KEY_Q))
 		rotation.z -= rotSpeed * dt;
-	if (glfwGetKey(_gameWindow, GLFW_KEY_E) == GLFW_PRESS)
+	if (_input.getKeyState(GLFW_KEY_E))
 		rotation.z += rotSpeed * dt;
-	if (glfwGetKey(_gameWindow, GLFW_KEY_UP) == GLFW_PRESS)
+	if (_input.getKeyState(GLFW_KEY_UP))
 		rotation.x -= rotSpeed * dt;
-	if (glfwGetKey(_gameWindow, GLFW_KEY_DOWN) == GLFW_PRESS)
+	if (_input.getKeyState(GLFW_KEY_DOWN))
 		rotation.x += rotSpeed * dt;
-	if (glfwGetKey(_gameWindow, GLFW_KEY_LEFT) == GLFW_PRESS)
+	if (_input.getKeyState(GLFW_KEY_LEFT))
 		rotation.y -= rotSpeed * dt;
-	if (glfwGetKey(_gameWindow, GLFW_KEY_RIGHT) == GLFW_PRESS)
+	if (_input.getKeyState(GLFW_KEY_RIGHT))
 		rotation.y += rotSpeed * dt;
-	if (glfwGetKey(_gameWindow, GLFW_KEY_P) == GLFW_PRESS) {
+	if (_input.getKeyState(GLFW_KEY_P)) {
 		_changeScene = true;
 		_newSceneName = "TestScene";
 	}

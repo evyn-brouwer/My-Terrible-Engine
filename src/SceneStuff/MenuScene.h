@@ -21,7 +21,7 @@ private:
 
 	virtual void virtualUpdate(float dt)override;
 
-	std::shared_ptr<Shader> myTestShader = NULL;;
+	std::shared_ptr<mte::Shader> myTestShader = NULL;;
 	std::shared_ptr<Camera> myTestCamera = NULL;
 	std::shared_ptr<Cube> myTestCube = NULL;
 	std::shared_ptr<Chunk> mytestChunk = NULL;

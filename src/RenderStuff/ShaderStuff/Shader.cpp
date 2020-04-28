@@ -1,16 +1,16 @@
 #include "Shader.h"
 
-Shader::Shader()
+mte::Shader::Shader()
 {
 	myShaderHandle = glCreateProgram();
 }
 
-Shader::~Shader()
+mte::Shader::~Shader()
 {
 	glDeleteProgram(myShaderHandle);
 }
 
-void Shader::compile(const char* vs_source, const char* fs_source)
+void mte::Shader::compile(const char* vs_source, const char* fs_source)
 {
 	// Compile our two shader programs
 	GLuint vs = __CompileShaderPart(vs_source, GL_VERTEX_SHADER);
@@ -30,36 +30,54 @@ void Shader::compile(const char* vs_source, const char* fs_source)
 	// Get whether the link was successful
 	GLint success = 0;
 	glGetProgramiv(myShaderHandle, GL_LINK_STATUS, &success);
-	// If not, we need to grab the log and throw an exception
-	if (success == GL_FALSE) {
-		// TODO: Read the log file
-		// Throw a runtime exception
-		throw new std::runtime_error("Failed to link shader program!");
-	}
-	else {
-		std::cout<<("Shader has been linked") << std::endl;
-	}
-	if (success == GL_FALSE) {
-		// Get the length of the log
-		GLint length = 0;
-		glGetProgramiv(myShaderHandle, GL_INFO_LOG_LENGTH, &length);
-		if (length > 0) {
-			// Read the log from openGL
-			char* log = new char[length];
-			glGetProgramInfoLog(myShaderHandle, length, &length, log);
-			std::cout<<("Shader failed to link: ")<< log << std::endl;
-			delete[] log;
+
+	{
+		Error error;
+		error._errorLocation = "Shader.cpp";
+		if (success == GL_FALSE) {
+			// TODO: Read the log file
+			// Throw a runtime exception
+			error._errorSeverity = mte::ErrorSeverityLevel::gameCrashing;
+			error._errorMessage = "Failed to link shader program!";
 		}
 		else {
-			std::cout<<("Shader failed to link for an unknown reason!")<<std::endl;
+			error._errorSeverity = mte::ErrorSeverityLevel::great;
+			error._errorMessage = "Shader has been linked";
 		}
-		// Delete the partial program
-		glDeleteProgram(myShaderHandle);
-		// Throw a runtime exception
-		throw new std::runtime_error("Failed to link shader program!");
+		_logger.sendError(error);
 	}
+	// If not, we need to grab the log and throw an exception
+	{
+		Error error;
+		error._errorLocation = "Shader.cpp";
+		error._errorSeverity = mte::ErrorSeverityLevel::gameCrashing;
+		if (success == GL_FALSE) {
+			// Get the length of the log
+			GLint length = 0;
+			glGetProgramiv(myShaderHandle, GL_INFO_LOG_LENGTH, &length);
+			if (length > 0) {
+				// Read the log from openGL
+				
+				char* log = new char[length];
+				glGetProgramInfoLog(myShaderHandle, length, &length, log);
+				std::string logString(log);
+				error._errorMessage = "Shader failed to link: " + logString;
+				delete[] log;
+			}
+			else {
+				error._errorMessage = "Shader failed to link for an unknown reason!";
+			}
+			// Delete the partial program
+			glDeleteProgram(myShaderHandle);
+			// Throw a runtime exception
+			error._errorMessage = "Failed to link shader program!";
+			_logger.sendError(error);
+		}
+		
+	}
+	
 }
-char* readFile(const char* filename) {
+char* mte::Shader::readFile(const char* filename) {
 	// Declare and open the file stream
 	std::ifstream file;
 	file.open(filename, std::ios::binary);
@@ -85,11 +103,16 @@ char* readFile(const char* filename) {
 	}
 	// Otherwise, we failed to open our file, throw a runtime error
 	else {
-		throw std::runtime_error("We cannot open the file!");
+		mte::Error error;
+		error._errorLocation = "Shader.cpp";
+		error._errorSeverity = mte::ErrorSeverityLevel::gameCrashing;
+		std::string filenameString(filename);
+		error._errorMessage = "We cannot open " + filenameString;
+		_logger.sendError(error);
 	}
 }
 
-void Shader::Load(const char* vsFile, const char* fsFile)
+void mte::Shader::Load(const char* vsFile, const char* fsFile)
 {
 	// Load in our shaders
 	char* vs_source = readFile(vsFile);
@@ -101,37 +124,37 @@ void Shader::Load(const char* vsFile, const char* fsFile)
 	delete[] vs_source;
 }
 
-void Shader::Bind()
+void mte::Shader::Bind()
 {
 	glUseProgram(myShaderHandle);
 }
 
-void Shader::SetUniform(const char* name, const glm::mat4& value) {
+void mte::Shader::SetUniform(const char* name, const glm::mat4& value) {
 	GLint loc = glGetUniformLocation(myShaderHandle, name);
 	if (loc != -1) {
 		glProgramUniformMatrix4fv(myShaderHandle, loc, 1, false, &value[0][0]);
 	}
 }
-void Shader::SetUniform(const char* name, const glm::mat3& value) {
+void mte::Shader::SetUniform(const char* name, const glm::mat3& value) {
 	GLint loc = glGetUniformLocation(myShaderHandle, name);
 	if (loc != -1) {
 		glProgramUniformMatrix3fv(myShaderHandle, loc, 1, false, &value[0][0]);
 	}
 }
-void Shader::SetUniform(const char* name, const glm::vec3& value) {
+void mte::Shader::SetUniform(const char* name, const glm::vec3& value) {
 	GLint loc = glGetUniformLocation(myShaderHandle, name);
 	if (loc != -1) {
 		glProgramUniform3fv(myShaderHandle, loc, 1, &value[0]);
 	}
 }
-void Shader::SetUniform(const char* name, const float& value) {
+void mte::Shader::SetUniform(const char* name, const float& value) {
 	GLint loc = glGetUniformLocation(myShaderHandle, name);
 	if (loc != -1) {
 		glProgramUniform1fv(myShaderHandle, loc, 1, &value);
 	}
 }
 
-GLuint Shader::__CompileShaderPart(const char* source, GLenum type)
+GLuint mte::Shader::__CompileShaderPart(const char* source, GLenum type)
 {
 	GLuint result = glCreateShader(type);
 	// Load in our shader source and compile it
@@ -151,14 +174,24 @@ GLuint Shader::__CompileShaderPart(const char* source, GLenum type)
 		// Get the log
 		glGetShaderInfoLog(result, logSize, &logSize, log);
 		// Dump error log
-		std::cout << ("Failed to compile shader part: ") << log << std::endl;
+		Error error;
+		error._errorLocation = "Shader.cpp";
+		error._errorSeverity = mte::ErrorSeverityLevel::gameCrashing;
+		std::string logString(log);
+		error._errorMessage ="Failed to compile shader part: " + logString;
+		_logger.sendError(error);
 		// Clean up our log memory
 		delete[] log;
 		// Delete the broken shader result
 		glDeleteShader(result);
 	}
 	else {
-		std::cout << ("Shader part has been compiled!") << std::endl;
+		Error error;
+		error._errorLocation = "Shader.cpp";
+		error._errorSeverity = mte::ErrorSeverityLevel::great;
+		std::string sourceString(source);
+		error._errorMessage = "Shader part has been compiled: " + sourceString;
+		_logger.sendError(error);
 	}
 	// Return the compiled shader part
 	return result;

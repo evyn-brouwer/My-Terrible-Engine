@@ -14,6 +14,11 @@ private:
 
 	virtual void virtualUpdate(float dt)override;
 
-
+	float vertices[9] = {
+	-0.5f, -0.5f, 0.0f,
+	 0.5f, -0.5f, 0.0f,
+	 0.0f,  0.5f, 0.0f
+	};
+	unsigned int VBO;
 
 };

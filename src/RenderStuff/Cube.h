@@ -9,7 +9,7 @@
 class Cube
 {
 public:
-	Cube(std::shared_ptr<Shader> shader, std::shared_ptr<Camera> camera, glm::vec3 position);
+	Cube(std::shared_ptr<mte::Shader> shader, std::shared_ptr<Camera> camera, glm::vec3 position);
 
 	void draw();
 	
@@ -19,6 +19,6 @@ private:
 
 	QuadRenderer _faces[6];
 	
-	std::shared_ptr<Shader> _shader;
+	std::shared_ptr<mte::Shader> _shader;
 	std::shared_ptr<Camera> _camera;
 };
