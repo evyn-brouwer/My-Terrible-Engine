@@ -57,6 +57,9 @@ void TestScene::loadData()
 	}
 	stbi_image_free(data);
 
+
+	_testMesh = std::make_shared<mte::Mesh>("Assets/Meshes/test.obj");
+
 }
 
 void TestScene::Resize(int Width, int Height)
@@ -73,6 +76,7 @@ void TestScene::virtualUpdate(float dt)
 	glBindVertexArray(VAO);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
+	_testMesh->Draw();
 
 
 

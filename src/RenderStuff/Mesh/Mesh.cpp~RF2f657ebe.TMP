@@ -1,0 +1,94 @@
+#include "Mesh.h"
+
+#include <fstream>
+#include <sstream>
+#include <iostream>
+#include "Logging/Logger.h"
+
+namespace mte {
+	struct faceData {
+		unsigned vertexesIndexex[3];
+		unsigned textureIndexex[3];
+		unsigned normalIndexex[3];
+	};
+
+}
+
+mte::Mesh::Mesh(std::string filename)
+	:_filename(filename)
+{
+}
+
+mte::Mesh::Mesh(const std::vector<float>& verts, const std::vector<float>& texts, const std::vector<float>& norms)
+	:_vertices(verts),_uvs(texts),_normals(norms)
+{
+
+}
+
+mte::Mesh::Mesh(Mesh& copy)
+{
+	_filename = copy._filename;
+	_vertices = copy._vertices;
+	_normals = copy._normals;
+	_uvs = copy._uvs;
+}
+
+mte::Mesh::~Mesh()
+{
+	glDeleteVertexArrays(1,&_VAO);
+}
+
+void mte::Mesh::Draw()
+{
+}
+
+bool mte::Mesh::loadData()
+{
+	if (_loaded)
+		return true;
+
+	char inputString[128];
+
+	std::vector<glm::vec3> vertexData{};
+	std::vector<glm::vec3> textureData{};
+	std::vector<glm::vec3> normalData{};
+
+	std::vector<faceData> faces{};
+	std::vector<float> unPvertexData{};
+	std::vector<float> unPtextureData{};
+	std::vector<float> unPnormalData{};
+
+
+	std::ifstream input{};
+
+	input.open(_filename);
+	if (!input.good()) {
+		Error error;
+		error._errorLocation = "Mesh.cpp";
+		error._errorSeverity = mte::ErrorSeverityLevel::bad;
+		error._errorMessage = "Problem loading: " + _filename;
+		_logger.sendError(error);
+		return false;
+	}
+
+	while (input.eof()) {
+		input.getline(inputString,128);
+
+		if (inputString[0] == 'v' && inputString[1] == ' ') {
+			glm::vec3 vertData{0,0,0};
+
+			std::sscanf(inputString,"v %f %f %f",&vertData.x, &vertData.y, &vertData.z);
+		}
+		else if (inputString[0] == 'v' && inputString[1] == 't') {
+			glm::vec2 texCoord{ 0,0 };
+
+			std::scanf(inputString, "v %f %f %f", &vertData.x, &vertData.y, &vertData.z);
+		}
+
+	}
+
+
+
+
+	return false;
+}

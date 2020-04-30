@@ -5,6 +5,7 @@
 #include <stb_image.h>
 
 #include "RenderStuff/ShaderStuff/Shader.h"
+#include "RenderStuff/Mesh/Mesh.h"
 
 class TestScene : public mte::Scene
 {
@@ -44,5 +45,7 @@ private:
 	unsigned int texture;
 
 	std::shared_ptr<mte::Shader> _simpleShader;
+
+	std::shared_ptr<mte::Mesh> _testMesh;
 
 };

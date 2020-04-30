@@ -90,11 +90,11 @@ bool mte::Game::init()
 
 	std::shared_ptr<MenuScene> menuScene = std::make_shared<MenuScene>(_gameWindow,"MenuScene");
 	_sceneManager->addScene(menuScene);
-	//_sceneManager->_currentScene = menuScene;
+	_sceneManager->_currentScene = menuScene;
 
 	std::shared_ptr<TestScene> testScene = std::make_shared<TestScene>(_gameWindow, "TestScene");
 	_sceneManager->addScene(testScene);
-	_sceneManager->_currentScene = testScene;
+	//_sceneManager->_currentScene = testScene;
 
 	glEnable(GL_DEPTH_TEST);
 

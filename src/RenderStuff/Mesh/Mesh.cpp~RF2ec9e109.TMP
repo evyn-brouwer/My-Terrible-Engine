@@ -1,0 +1,38 @@
+#include "Mesh.h"
+
+namespace mte {
+	struct faceData {
+		unsigned vertexesIndexex[3];
+		unsigned textureIndexex[3];
+		unsigned normalIndexex[3];
+	};
+
+}
+
+mte::Mesh::Mesh(std::string filename)
+	:_filename(filename)
+{
+}
+
+mte::Mesh::Mesh(const std::vector<float>& verts, const std::vector<float>& texts, const std::vector<float>& norms)
+{
+}
+
+mte::Mesh::Mesh(Mesh& copy)
+{
+	_filename = copy._filename;
+}
+
+mte::Mesh::~Mesh()
+{
+	glDeleteVertexArrays(1,&_VAO);
+}
+
+void mte::Mesh::Draw()
+{
+}
+
+bool mte::Mesh::loadData()
+{
+	return false;
+}

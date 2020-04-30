@@ -8,6 +8,8 @@ extern "C" {
 	__declspec(dllexport) int AmdPowerXpressRequestHighPerformance = 0x01;
 }
 
+
+
 int main()
 {
 	//Game* myGame = new Game("Evyn's Terrible Game",1600,900);

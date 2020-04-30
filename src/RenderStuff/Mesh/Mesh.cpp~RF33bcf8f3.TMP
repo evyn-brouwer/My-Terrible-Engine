@@ -78,14 +78,14 @@ bool mte::Mesh::loadData()
 		_logger.sendError(error);
 		return false;
 	}
-
-	while (!input.eof()) {
+	std::cout<<_filename;
+	while (input.eof()) {
 		input.getline(inputString,128);
 
 		if (inputString[0] == 'v' && inputString[1] == ' ') {  
 			glm::vec3 vertData{ 0,0,0 };
 
-			int error = std::sscanf(inputString, "v %f %f %f", &vertData.x, &vertData.y, &vertData.z);
+			int error = std::scanf(inputString, "v %f %f %f", &vertData.x, &vertData.y, &vertData.z);
 			vertexData.push_back(vertData);
 		}
 		else if (inputString[0] == 'v' && inputString[1] == 't') {
@@ -103,8 +103,7 @@ bool mte::Mesh::loadData()
 		else if (inputString[0] == 'f' && inputString[1] == ' ') {
 			faces.emplace_back();
 
-			int error = std::sscanf(inputString, "f %u/%u/%u %u/%u/%u %u/%u/%u", 
-				&faces.back().vertexesIndexex[0], &faces.back().textureIndexex[0], &faces.back().normalIndexex[0],
+			int error = std::sscanf(inputString, "f %u/%u/%u %u/%u/%u %u/%u/%u", &faces.back().vertexesIndexex[0], &faces.back().textureIndexex[0], &faces.back().normalIndexex[0],
 				&faces.back().vertexesIndexex[1], &faces.back().textureIndexex[1], &faces.back().normalIndexex[1],
 				&faces.back().vertexesIndexex[2], &faces.back().textureIndexex[2], &faces.back().normalIndexex[2]);
 		}
