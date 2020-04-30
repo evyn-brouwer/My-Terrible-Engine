@@ -12,9 +12,9 @@ public:
 		_position = &_translateMat[3];
 	}
 
-		/*
-		Purp: performs matrix multiplication and assigns the final product to the transformMat
-		*/
+	/*
+	Purp: performs matrix multiplication and assigns the final product to the transformMat
+	*/
 	void update();
 
 	glm::vec3 translate(const glm::vec3& translateBy);
@@ -26,9 +26,9 @@ public:
 	const glm::mat4& rotate(const glm::vec3& rotateOn, float rotationAngle);
 	const glm::mat4& scale(const glm::vec3& scaleVec, float sizeScalar);
 
-	glm::mat4 _transformMat{ 1.0f };	
+	glm::mat4 _transformMat{ 1.0f };
 
-	glm::mat4 _parentTransform{ 1.0f };
+	std::shared_ptr<glm::mat4> _parentTransform = NULL;//TO DO
 	glm::mat4 _worldTransformMat{ 1.0f };
 
 	glm::vec4* _position = nullptr;

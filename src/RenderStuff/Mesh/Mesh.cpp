@@ -3,7 +3,6 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
-#include "Logging/Logger.h"
 /*
 A lot of this comes from the cappuccino engine
 */

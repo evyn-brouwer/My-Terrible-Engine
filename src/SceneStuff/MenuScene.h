@@ -25,8 +25,9 @@ private:
 
 	std::shared_ptr<mte::Shader> myTestShader = NULL;;
 	std::shared_ptr<Camera> myTestCamera = NULL;
-	//std::shared_ptr<Cube> myTestCube = NULL;
-	//std::shared_ptr<Chunk> mytestChunk = NULL;
+	std::shared_ptr<Cube> myTestCube = NULL;
+	std::shared_ptr<Chunk> mytestChunk = NULL;
 
+	std::shared_ptr<mte::Shader> meshShader;
 	std::shared_ptr<mte::Mesh> _testMesh;
 };

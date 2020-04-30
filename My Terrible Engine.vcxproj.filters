@@ -36,9 +36,6 @@
     <ClCompile Include="src\RenderStuff\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\RenderStuff\Transform.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\RenderStuff\QuadRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -72,6 +69,9 @@
     <ClCompile Include="src\RenderStuff\Mesh\Mesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\RenderStuff\Mesh\Transform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Game.h">
@@ -93,9 +93,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\RenderStuff\Camera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\RenderStuff\Transform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\RenderStuff\Cube.h">
@@ -128,13 +125,16 @@
     <ClInclude Include="src\RenderStuff\Mesh\Mesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\RenderStuff\Mesh\Vertex.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\RenderStuff\ShaderStuff\Shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="external\stb_image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RenderStuff\Mesh\Model.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RenderStuff\Mesh\Transform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -143,5 +143,7 @@
     <None Include="Assets\Shaders\testShader.fs" />
     <None Include="Assets\Shaders\simplestShader.vs" />
     <None Include="Assets\Shaders\simplestShader.fs" />
+    <None Include="Assets\Shaders\meshShader.vs" />
+    <None Include="Assets\Shaders\meshShader.fs" />
   </ItemGroup>
 </Project>

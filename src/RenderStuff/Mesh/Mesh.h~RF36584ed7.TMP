@@ -1,15 +1,11 @@
 #pragma once
 
-#include <glad/glad.h>
-
-#include "RenderStuff/Mesh/Transform.h"
+#include "RenderStuff/Mesh/Vertex.h"
 
 #include "Logging/Logger.h"
 
 #include <vector>
 #include <string>
-
-
 
 namespace mte {
 
@@ -45,8 +41,6 @@ namespace mte {
 
 		std::string _filename= "";
 		std::string _name = "";
-
-		Transform _transform;
 	};
 
 

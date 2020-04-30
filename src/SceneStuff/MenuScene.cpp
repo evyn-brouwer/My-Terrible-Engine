@@ -18,11 +18,14 @@ void MenuScene::loadData()
 	myTestCamera->LookAt(glm::vec3(0));
 	myTestCamera->Projection = glm::perspective(glm::radians(60.0f), 1600.0f/900.0f, 0.01f, 1000.0f);
 	
-	//myTestCube = std::make_shared<Cube>(myTestShader,myTestCamera,glm::vec3(0,0,0));
+	myTestCube = std::make_shared<Cube>(myTestShader,myTestCamera,glm::vec3(0,0,0));
 
-	//mytestChunk = std::make_shared<Chunk>(myTestShader, myTestCamera);
+	mytestChunk = std::make_shared<Chunk>(myTestShader, myTestCamera);
 
-	_testMesh = std::make_shared<mte::Mesh>("Assets/Meshes/test.obj");
+
+	meshShader = std::make_shared<mte::Shader>();
+	meshShader->Load("./Assets/Shaders/meshShader.vs", "./Assets/Shaders/meshShader.fs");
+	_testMesh = std::make_shared<mte::Mesh>("./Assets/Meshes/test.obj");
 }
 
 void MenuScene::Resize(int Width, int Height)
@@ -66,17 +69,23 @@ void MenuScene::virtualUpdate(float dt)
 		_newSceneName = "TestScene";
 	}
 		
+	//myTestShader->Bind();
 
 	myTestCamera->Rotate(rotation);
 	myTestCamera->Move(movement);
 
 	//myTestCube->_transform._transformMat = myTestCube->_transform.rotate(glm::vec3(1.0f, 0.0, 0.0), 45.0f * dt);
-
+	//
 	//myTestCube->draw();
 	//
 	//mytestChunk->draw();
 
 
+	
 
-	_testMesh->Draw();
+
+	meshShader->Bind();
+	meshShader->SetUniform("a_ModelViewProjection",myTestCamera->GetViewProjection());
+
+	_testMesh->draw();
 }
