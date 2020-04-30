@@ -120,6 +120,7 @@
     <ClInclude Include="src\RenderStuff\Camera.h" />
     <ClInclude Include="src\RenderStuff\QuadRenderer.h" />
     <ClInclude Include="src\RenderStuff\Structs.h" />
+    <ClInclude Include="src\Resources\ResourceManager.h" />
     <ClInclude Include="src\SceneStuff\Scene.h" />
     <ClInclude Include="src\SceneStuff\SceneManager.h" />
     <ClInclude Include="src\SceneStuff\MenuScene.h" />

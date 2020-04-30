@@ -17,8 +17,8 @@ namespace mte {
 
 }
 
-mte::Mesh::Mesh(std::string filename)
-	:_filename(filename)
+mte::Mesh::Mesh(std::string filename,std::string name)
+	:_filename(filename),_name(name)
 {
 	_transform = std::make_shared<Transform>();
 	loadData();

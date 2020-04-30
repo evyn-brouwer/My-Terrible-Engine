@@ -25,7 +25,7 @@ glm::vec3 Transform::translate(const glm::vec3& translateBy) {
 void Transform::update() {
 	*_transformMat = _translateMat * _rotateMat * _scaleMat;
 
-	if (*_parentTransform != glm::mat4{ 1.0f }) {
+	if (*_parentTransform != glm::mat4{ 1.0f }&&_parentTransform != NULL) {
 		_worldTransformMat = *_parentTransform * *_transformMat;
 	}
 	else {

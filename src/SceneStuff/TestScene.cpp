@@ -58,7 +58,7 @@ void TestScene::loadData()
 	stbi_image_free(data);
 
 
-	_testMesh = std::make_shared<mte::Mesh>("Assets/Meshes/test.obj");
+	_testMesh = std::make_shared<mte::Mesh>("Assets/Meshes/test.obj", "Test Object");
 
 }
 

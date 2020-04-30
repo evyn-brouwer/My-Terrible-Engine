@@ -19,6 +19,6 @@ namespace mte {
 
 		bool _active = true;
 
-	std::shared_ptr<Transform> _transform;
+		std::shared_ptr<Transform> _transform;
 	};
 }

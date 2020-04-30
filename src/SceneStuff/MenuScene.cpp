@@ -25,7 +25,7 @@ void MenuScene::loadData()
 
 	meshShader = std::make_shared<mte::Shader>();
 	meshShader->Load("./Assets/Shaders/meshShader.vs", "./Assets/Shaders/meshShader.fs");
-	_testMesh = std::make_shared<mte::Mesh>("./Assets/Meshes/test.obj");
+	_testMesh = std::make_shared<mte::Mesh>("./Assets/Meshes/test.obj","Test Object");
 }
 
 void MenuScene::Resize(int Width, int Height)

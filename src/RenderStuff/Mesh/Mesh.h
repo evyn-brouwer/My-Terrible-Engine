@@ -15,7 +15,7 @@ namespace mte {
 	class Mesh
 	{
 	public:
-		Mesh(std::string filename);
+		Mesh(std::string filename, std::string name);
 		Mesh(const std::vector<float> & verts, const std::vector<float>& texts, const std::vector<float>& norms);
 		Mesh(Mesh& copy);
 		virtual ~Mesh();
