@@ -2,8 +2,9 @@
 
 void mte::Model::draw()
 {
-	for (unsigned i = 0; i < _meshes.size(); i++) {
-		_meshes[i].draw();
+	if(_active)
+		for (unsigned i = 0; i < _meshes.size(); i++) {
+			_meshes[i].draw();
 
-	}
+		}
 }

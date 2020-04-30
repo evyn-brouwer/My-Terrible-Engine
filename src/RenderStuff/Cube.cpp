@@ -20,7 +20,7 @@ void Cube::draw()
 	_transform.update();
 
 	_shader->Bind();
-	_shader->SetUniform("a_ModelViewProjection", _camera->GetViewProjection() * _transform._transformMat);
+	_shader->SetUniform("a_ModelViewProjection", _camera->GetViewProjection() * *_transform._transformMat);
 	for (unsigned i = 0; i < 6; i++)
 		_faces[i].draw();
 }

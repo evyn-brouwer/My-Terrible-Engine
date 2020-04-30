@@ -17,6 +17,8 @@ namespace mte {
 		
 		std::vector<Mesh> _meshes;
 
+		bool _active = true;
+
 	std::shared_ptr<Transform> _transform;
 	};
 }

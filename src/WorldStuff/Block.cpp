@@ -16,5 +16,5 @@ void Block::draw()
 	if (_cubeNotMesh)
 		_cube->draw();
 	else
-		_mesh->Draw();
+		_mesh->draw();
 }

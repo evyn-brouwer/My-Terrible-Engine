@@ -20,6 +20,7 @@ namespace mte {
 mte::Mesh::Mesh(std::string filename)
 	:_filename(filename)
 {
+	_transform = std::make_shared<Transform>();
 	loadData();
 }
 
@@ -42,11 +43,12 @@ mte::Mesh::~Mesh()
 	glDeleteVertexArrays(1,&_VAO);
 }
 
-void mte::Mesh::Draw()
+void mte::Mesh::draw()
 {
-	glBindVertexArray(_VAO);
-	glDrawArrays(GL_TRIANGLES,0,_vertexCount);
-
+	if (active) {
+		glBindVertexArray(_VAO);
+		glDrawArrays(GL_TRIANGLES, 0, _vertexCount);
+	}
 }
 
 bool mte::Mesh::loadData()

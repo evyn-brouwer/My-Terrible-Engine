@@ -10,7 +10,6 @@
 #include <string>
 
 
-
 namespace mte {
 
 	class Mesh
@@ -21,7 +20,7 @@ namespace mte {
 		Mesh(Mesh& copy);
 		virtual ~Mesh();
 
-		virtual void Draw();
+		virtual void draw();
 
 	private:
 		Logger _logger;
@@ -46,7 +45,9 @@ namespace mte {
 		std::string _filename= "";
 		std::string _name = "";
 
-		Transform _transform;
+		std::shared_ptr<Transform> _transform;
+
+		bool active = true;
 	};
 
 

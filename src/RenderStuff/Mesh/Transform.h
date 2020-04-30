@@ -4,12 +4,14 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/quaternion.hpp>
+#include <memory>
 
 class Transform
 {
 public:
 	Transform() {
 		_position = &_translateMat[3];
+		_transformMat = std::make_shared<glm::mat4>(1.0f);
 	}
 
 	/*
@@ -26,7 +28,7 @@ public:
 	const glm::mat4& rotate(const glm::vec3& rotateOn, float rotationAngle);
 	const glm::mat4& scale(const glm::vec3& scaleVec, float sizeScalar);
 
-	glm::mat4 _transformMat{ 1.0f };
+	std::shared_ptr<glm::mat4> _transformMat;
 
 	std::shared_ptr<glm::mat4> _parentTransform = NULL;//TO DO
 	glm::mat4 _worldTransformMat{ 1.0f };
