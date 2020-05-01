@@ -28,6 +28,15 @@ static void cursor_position_callback(GLFWwindow* window, double xpos, double ypo
 	}
 }
 
+static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods) {
+	mte::Game* myGame = (mte::Game*)glfwGetWindowUserPointer(window);
+	if (myGame) {
+		myGame->_input.mouse_button_callback(window,button,action,mods);
+	}
+
+}
+
+
 mte::Game::Game(std::string gameName, GLuint width, GLuint height)
 	: _gameName(gameName)
 {
@@ -71,7 +80,7 @@ bool mte::Game::init()
 	glfwSetWindowSizeCallback(_gameWindow, GlfwWindowResizedCallback);
 	glfwSetKeyCallback(_gameWindow, GLFW_key_callback);
 	glfwSetCursorPosCallback(_gameWindow, cursor_position_callback);
-
+	glfwSetMouseButtonCallback(_gameWindow,mouse_button_callback);
 
 	glfwMakeContextCurrent(_gameWindow);
 

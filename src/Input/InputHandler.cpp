@@ -2,11 +2,20 @@
 
 void mte::InputHandler::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-	if (action == GLFW_PRESS) {
-		_keylist[key] = true;
+	if (!key > 1024) {
+		if (action == GLFW_PRESS) {
+			_keylist[key] = true;
+		}
+		else if (action == GLFW_RELEASE) {
+			_keylist[key] = false;
+		}
 	}
-	else if (action == GLFW_RELEASE) {
-		_keylist[key] = false;
+	else {
+		Error error;
+		error._errorLocation = "InputHandler.cpp";
+		error._errorSeverity = mte::ErrorSeverityLevel::bad;
+		error._errorMessage = "Keyboard key " + std::to_string(key) + " is not supported!";
+		_logger.sendError(error);
 	}
 }
 
@@ -14,6 +23,26 @@ void mte::InputHandler::cursor_postion_callback(GLFWwindow* window, double xPos,
 {
 	_mouseX = xPos;
 	_mouseY = yPos;
+}
+
+void mte::InputHandler::mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+{
+	if (!button > 32) {
+		if (action == GLFW_PRESS) {
+			_mouseButtonList[button] = true;
+		}
+		else if (action == GLFW_RELEASE) {
+			_mouseButtonList[button] = false;
+		}
+	}
+	else {
+		Error error;
+		error._errorLocation = "InputHandler.cpp";
+		error._errorSeverity = mte::ErrorSeverityLevel::bad;
+		error._errorMessage = "Mouse button " + std::to_string(button) + " is not supported!";
+		_logger.sendError(error);
+	}
+
 }
 
 void mte::InputHandler::cursorMode(GLFWwindow* window, int mode)

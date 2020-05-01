@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Types.h"
+#include "Resources/Types.h"
 #include "WorldStuff/WorldConstants.h"
 
 #include <string>

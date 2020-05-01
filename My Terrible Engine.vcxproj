@@ -127,7 +127,7 @@
     <ClInclude Include="src\SceneStuff\TestScene.h" />
     <ClInclude Include="src\RenderStuff\ShaderStuff\Shader.h" />
     <ClInclude Include="src\RenderStuff\Cube.h" />
-    <ClInclude Include="src\Types.h" />
+    <ClInclude Include="src\Resources\Types.h" />
     <ClInclude Include="src\WorldStuff\Block.h" />
     <ClInclude Include="src\WorldStuff\Blocks\BlockData.h" />
     <ClInclude Include="src\WorldStuff\Chunk.h" />

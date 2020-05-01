@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Types.h"
+#include "Resources/Types.h"
 
 using blockType = u8;
 

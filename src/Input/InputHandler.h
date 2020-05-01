@@ -11,6 +11,7 @@ namespace mte {
 		InputHandler() {};
 		void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 		void cursor_postion_callback(GLFWwindow* window, double xPos, double yPos);
+		void mouse_button_callback(GLFWwindow* window,int button,int action, int mods);
 
 		/*
 		modes:
