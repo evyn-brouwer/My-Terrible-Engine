@@ -2,9 +2,44 @@
 
 void mte::Logger::printErrors()
 {
-	for (auto x : _errorList)
-		x.print();
+	if (_blackListBool) {
+		for (auto x : _errorList) {
+			for (auto z : _errorBlackList) {
+				bool blacklisted = false;
+				for (auto y : x._errorTypes) {
+					if (z == y) {
+						blacklisted = true;
+						continue;
+					}
+				}
+				if(!blacklisted)
+					x.print();
+			}
+		}		
+	}
+	else
+	{
+		for (auto x : _errorList) {
+			for (auto z : _errorWhiteList) {
+				bool whitelisted = false;
+				for (auto y : x._errorTypes) {
+					if (z == y) {
+						whitelisted = true;
+						continue;
+					}
+				}
+				if (whitelisted)
+					x.print();
+			}
+		}
+	}
+
 	_errorList.clear();
+}
+
+void mte::Logger::createLists()
+{
+	_errorBlackList.push_back(mte::ErrorType::Log);
 }
 
 mte::Error::Error()
@@ -31,3 +66,6 @@ void mte::Error::print()
 
 std::vector<mte::Error> mte::Logger::_errorList;
 unsigned mte::Error::_errorTotal = 0;
+
+std::vector<mte::ErrorType> mte::Logger::_errorBlackList;
+std::vector<mte::ErrorType> mte::Logger::_errorWhiteList;

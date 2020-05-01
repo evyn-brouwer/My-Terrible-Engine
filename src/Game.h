@@ -25,7 +25,9 @@ namespace mte {
 		
 		~Game();
 
-
+		/*
+		this function will loop continously until the window is closed
+		*/
 		void runGame();
 
 		void Resize(GLuint width, GLuint height);
@@ -33,6 +35,9 @@ namespace mte {
 		InputHandler _input;
 		Logger _logger;
 	private:
+		/*
+		this function is a contructor
+		*/
 		bool init();
 
 

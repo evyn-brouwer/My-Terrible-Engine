@@ -5,9 +5,7 @@
 
 void GlfwWindowResizedCallback(GLFWwindow* window, int width, int height) {
 	glViewport(0, 0, width, height);
-
-	mte::Game* myGame = reinterpret_cast<mte::Game*>(glfwGetWindowUserPointer(window));//TODO doesn't work
-	
+	mte::Game* myGame = reinterpret_cast<mte::Game*>(glfwGetWindowUserPointer(window));
 	if (myGame) {
 		myGame->Resize(width, height);
 	}
@@ -56,13 +54,13 @@ mte::Game::~Game()
 
 bool mte::Game::init()
 {
-
 	// Initialize GLFW
 	if (!glfwInit() ) {
 		Error error;
 		error._errorLocation = "Game.cpp";
 		error._errorMessage = "Failed to initialize GLFW";
 		error._errorSeverity = mte::ErrorSeverityLevel::gameCrashing;
+		error._errorTypes.push_back(mte::ErrorType::Init);
 		_logger.sendError(error);
 		return false;
 	}
@@ -73,14 +71,16 @@ bool mte::Game::init()
 		error._errorLocation = "Game.cpp";
 		error._errorMessage = "Failed to create Game Window";
 		error._errorSeverity = mte::ErrorSeverityLevel::gameCrashing;
+		error._errorTypes.push_back(mte::ErrorType::Init);
 		_logger.sendError(error);
 		return false;
 	}
-	glfwSetWindowUserPointer(_gameWindow,this);
+
+	glfwSetWindowUserPointer(_gameWindow, this);
 	glfwSetWindowSizeCallback(_gameWindow, GlfwWindowResizedCallback);
 	glfwSetKeyCallback(_gameWindow, GLFW_key_callback);
 	glfwSetCursorPosCallback(_gameWindow, cursor_position_callback);
-	glfwSetMouseButtonCallback(_gameWindow,mouse_button_callback);
+	glfwSetMouseButtonCallback(_gameWindow, mouse_button_callback);
 
 	glfwMakeContextCurrent(_gameWindow);
 
@@ -89,6 +89,7 @@ bool mte::Game::init()
 		error._errorLocation = "Game.cpp";
 		error._errorMessage = "Failed to initialize Glad";
 		error._errorSeverity = mte::ErrorSeverityLevel::gameCrashing;
+		error._errorTypes.push_back(mte::ErrorType::Init);
 		_logger.sendError(error); 
 		return false;
 	}
@@ -97,13 +98,16 @@ bool mte::Game::init()
 	std::cout << glGetString(GL_RENDERER) << std::endl;
 	std::cout << glGetString(GL_VERSION) << std::endl;
 
+
+	/*
+	create a function for each scene
+	*/
 	std::shared_ptr<MenuScene> menuScene = std::make_shared<MenuScene>(_gameWindow,"MenuScene");
 	_sceneManager->addScene(menuScene);
 	_sceneManager->_currentScene = menuScene;
 
 	std::shared_ptr<TestScene> testScene = std::make_shared<TestScene>(_gameWindow, "TestScene");
 	_sceneManager->addScene(testScene);
-	//_sceneManager->_currentScene = testScene;
 
 	glEnable(GL_DEPTH_TEST);
 
@@ -111,6 +115,7 @@ bool mte::Game::init()
 	error._errorLocation = "Game.cpp";
 	error._errorMessage = "Game has been initialized!";
 	error._errorSeverity = mte::ErrorSeverityLevel::great;
+	error._errorTypes.push_back(mte::ErrorType::CheckPoint);
 	_logger.sendError(error);
 	return true;
 }
@@ -118,6 +123,13 @@ bool mte::Game::init()
 
 void mte::Game::runGame()
 {
+	Error error;
+	error._errorLocation = "game.cpp";
+	error._errorSeverity = mte::ErrorSeverityLevel::normal;
+	error._errorTypes.push_back(mte::ErrorType::CheckPoint);
+	error._errorMessage = "Game started Running!";
+	_logger.sendError(error);
+
 	static float prevFrame = (float)glfwGetTime();
 	while (!glfwWindowShouldClose(_gameWindow)) {
 		glClearColor(0.5f, 0.5f, 0.5f, 1.0f);

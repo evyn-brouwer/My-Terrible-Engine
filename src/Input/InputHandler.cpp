@@ -2,7 +2,7 @@
 
 void mte::InputHandler::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-	if (!key > 1024) {
+	if (!key < 1024) {
 		if (action == GLFW_PRESS) {
 			_keylist[key] = true;
 		}
@@ -27,7 +27,7 @@ void mte::InputHandler::cursor_postion_callback(GLFWwindow* window, double xPos,
 
 void mte::InputHandler::mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 {
-	if (!button > 32) {
+	if (!button < 32) {
 		if (action == GLFW_PRESS) {
 			_mouseButtonList[button] = true;
 		}

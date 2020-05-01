@@ -24,11 +24,6 @@ mte::Mesh::Mesh(std::string filename,std::string name)
 	loadData();
 }
 
-mte::Mesh::Mesh(const std::vector<float>& verts, const std::vector<float>& texts, const std::vector<float>& norms)
-	:_vertices(verts),_uvs(texts),_normals(norms)
-{
-
-}
 
 mte::Mesh::Mesh(Mesh& copy)
 {
@@ -41,6 +36,7 @@ mte::Mesh::Mesh(Mesh& copy)
 mte::Mesh::~Mesh()
 {
 	glDeleteVertexArrays(1,&_VAO);
+	
 }
 
 void mte::Mesh::draw()

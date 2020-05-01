@@ -16,7 +16,6 @@ namespace mte {
 	{
 	public:
 		Mesh(std::string filename, std::string name);
-		Mesh(const std::vector<float> & verts, const std::vector<float>& texts, const std::vector<float>& norms);
 		Mesh(Mesh& copy);
 		virtual ~Mesh();
 
@@ -42,7 +41,7 @@ namespace mte {
 		std::vector<float> _normals;
 
 
-		std::string _filename= "";
+		std::string _filename = "";
 		std::string _name = "";
 
 		std::shared_ptr<Transform> _transform;

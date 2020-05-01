@@ -19,6 +19,14 @@ namespace mte {
 		boring=8, //gray 8
 	};
 
+	enum class ErrorType
+	{
+		Init=0,
+		Log,
+		CheckPoint,
+
+	};
+
 	struct Error {
 	public:
 		Error();
@@ -29,6 +37,7 @@ namespace mte {
 		void print();
 		static unsigned _errorTotal;
 		unsigned _errorID = 0;
+		std::vector <ErrorType> _errorTypes;
 	private:
 	};
 
@@ -39,10 +48,16 @@ namespace mte {
 
 		void printErrors();
 
+		void createLists();
+
 	private:
 
 		static std::vector<Error> _errorList;
 
+		bool _blackListBool = true; // while this is true it will not print anything on the blacklist, while false it will only print types on the white list
+
+		static std::vector<ErrorType> _errorWhiteList;
+		static std::vector<ErrorType> _errorBlackList;
 
 	};
 
