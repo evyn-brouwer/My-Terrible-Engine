@@ -39,9 +39,11 @@ void mte::Shader::compile(const char* vs_source, const char* fs_source)
 			// Throw a runtime exception
 			error._errorSeverity = mte::ErrorSeverityLevel::gameCrashing;
 			error._errorMessage = "Failed to link shader program!";
+			error._errorTypes.push_back(mte::ErrorType::Init);
 		}
 		else {
 			error._errorSeverity = mte::ErrorSeverityLevel::great;
+			error._errorTypes.push_back(mte::ErrorType::CheckPoint);
 			error._errorMessage = "Shader has been linked";
 		}
 		_logger.sendError(error);
@@ -51,6 +53,7 @@ void mte::Shader::compile(const char* vs_source, const char* fs_source)
 		Error error;
 		error._errorLocation = "Shader.cpp";
 		error._errorSeverity = mte::ErrorSeverityLevel::gameCrashing;
+		error._errorTypes.push_back(mte::ErrorType::Log);
 		if (success == GL_FALSE) {
 			// Get the length of the log
 			GLint length = 0;
@@ -108,6 +111,7 @@ char* mte::Shader::readFile(const char* filename) {
 		error._errorSeverity = mte::ErrorSeverityLevel::gameCrashing;
 		std::string filenameString(filename);
 		error._errorMessage = "We cannot open " + filenameString;
+		error._errorTypes.push_back(mte::ErrorType::Init);
 		_logger.sendError(error);
 	}
 }
@@ -177,6 +181,7 @@ GLuint mte::Shader::__CompileShaderPart(const char* source, GLenum type)
 		Error error;
 		error._errorLocation = "Shader.cpp";
 		error._errorSeverity = mte::ErrorSeverityLevel::gameCrashing;
+		error._errorTypes.push_back(mte::ErrorType::Log);
 		std::string logString(log);
 		error._errorMessage ="Failed to compile shader part: " + logString;
 		_logger.sendError(error);
@@ -191,6 +196,7 @@ GLuint mte::Shader::__CompileShaderPart(const char* source, GLenum type)
 		error._errorSeverity = mte::ErrorSeverityLevel::great;
 		std::string sourceString(source);
 		error._errorMessage = "Shader part has been compiled: " + sourceString;
+		error._errorTypes.push_back(mte::ErrorType::Log);
 		_logger.sendError(error);
 	}
 	// Return the compiled shader part

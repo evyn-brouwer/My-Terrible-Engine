@@ -24,6 +24,7 @@ namespace mte {
 		Init=0,
 		Log,
 		CheckPoint,
+		Bounds,
 
 	};
 

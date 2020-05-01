@@ -15,6 +15,7 @@ void mte::InputHandler::key_callback(GLFWwindow* window, int key, int scancode, 
 		error._errorLocation = "InputHandler.cpp";
 		error._errorSeverity = mte::ErrorSeverityLevel::bad;
 		error._errorMessage = "Keyboard key " + std::to_string(key) + " is not supported!";
+		error._errorTypes.push_back(mte::ErrorType::Bounds);
 		_logger.sendError(error);
 	}
 }
@@ -40,6 +41,7 @@ void mte::InputHandler::mouse_button_callback(GLFWwindow* window, int button, in
 		error._errorLocation = "InputHandler.cpp";
 		error._errorSeverity = mte::ErrorSeverityLevel::bad;
 		error._errorMessage = "Mouse button " + std::to_string(button) + " is not supported!";
+		error._errorTypes.push_back(mte::ErrorType::Bounds);
 		_logger.sendError(error);
 	}
 
