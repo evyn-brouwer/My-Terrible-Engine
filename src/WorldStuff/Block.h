@@ -1,6 +1,6 @@
 #pragma once
 #include "RenderStuff/Cube.h"
-#include "RenderStuff/Mesh/Mesh.h"
+#include "RenderStuff/Model/Mesh.h"
 
 class Block
 {

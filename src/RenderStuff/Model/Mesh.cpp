@@ -17,8 +17,8 @@ namespace mte {
 
 }
 
-mte::Mesh::Mesh(std::string filename,std::string name)
-	:_filename(filename),_name(name)
+mte::Mesh::Mesh(std::string meshFileName,std::string meshName, std::string texturefile, std::string textureName)
+	:_meshFileName(meshFileName),_meshName(meshName),_textureFileName(texturefile),_textureName(textureName)
 {
 	_transform = std::make_shared<Transform>();
 	loadData();
@@ -27,7 +27,7 @@ mte::Mesh::Mesh(std::string filename,std::string name)
 
 mte::Mesh::Mesh(Mesh& copy)
 {
-	_filename = copy._filename;
+	_meshFileName = copy._meshFileName;
 	_vertices = copy._vertices;
 	_normals = copy._normals;
 	_uvs = copy._uvs;
@@ -42,6 +42,7 @@ mte::Mesh::~Mesh()
 void mte::Mesh::draw()
 {
 	if (active) {
+		glBindTexture(GL_TEXTURE_2D, _texture);
 		glBindVertexArray(_VAO);
 		glDrawArrays(GL_TRIANGLES, 0, _vertexCount);
 	}
@@ -66,12 +67,12 @@ bool mte::Mesh::loadData()
 
 	std::ifstream input{};
 
-	input.open(_filename);
+	input.open(_meshFileName);
 	if (!input.good()) {
 		Error error;
 		error._errorLocation = "Mesh.cpp";
 		error._errorSeverity = mte::ErrorSeverityLevel::bad;
-		error._errorMessage = "Problem loading: " + _filename;
+		error._errorMessage = "Problem loading: " + _meshFileName;
 		_logger.sendError(error);
 		return false;
 	}
@@ -175,6 +176,35 @@ bool mte::Mesh::loadData()
 
 
 	input.close();
+
+
+	glGenTextures(1, &_texture);
+	glBindTexture(GL_TEXTURE_2D, _texture);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	int width, height, nrChannels;
+	unsigned char* data = stbi_load(_textureFileName.c_str(), &width, &height, &nrChannels, 0);
+	if (data)
+	{
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else
+	{
+		Error error;
+		error._errorLocation = "Mesh.cpp";
+		error._errorSeverity = mte::ErrorSeverityLevel::bad;
+		error._errorTypes.push_back(mte::ErrorType::LoadFail);
+		error._errorMessage = "Failed to load texture: " + _textureFileName;
+		_logger.sendError(error);
+	}
+	stbi_image_free(data);
+
 
 	_loaded = true;
 	return true;

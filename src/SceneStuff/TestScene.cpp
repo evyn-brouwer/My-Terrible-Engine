@@ -8,57 +8,15 @@ TestScene::TestScene(GLFWwindow* window, std::string sceneName)
 
 void TestScene::loadData()
 {
-	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);
-	glGenBuffers(1, &EBO);
+	_meshShader = std::make_shared<mte::Shader>();
+	_meshShader->Load("./Assets/Shaders/meshShader.vs", "./Assets/Shaders/meshShader.fs");
 
-	_simpleShader = std::make_shared<mte::Shader>();
-	_simpleShader->Load("./Assets/Shaders/simplestShader.vs", "./Assets/Shaders/simplestShader.fs");
+	_testMesh = std::make_shared<mte::Mesh>("Assets/Meshes/test.obj", "Test Mesh", "Assets/Textures/container.jpg","Test Texture");
 
-
-
-	// 1. bind Vertex Array Object
-	glBindVertexArray(VAO);
-	// 2. copy our vertices array in a vertex buffer for OpenGL to use
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-	// 3. copy our index array in a element buffer for OpenGL to use
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-	// 4. then set the vertex attributes pointers
-	// position attribute
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);
-	// color attribute
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
-	glEnableVertexAttribArray(1);
-
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
-	glEnableVertexAttribArray(2);
-
-	glGenTextures(1, &texture);
-	glBindTexture(GL_TEXTURE_2D, texture);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	int width, height, nrChannels;
-	unsigned char* data = stbi_load("Assets/Textures/container.jpg", &width, &height, &nrChannels, 0);
-	if (data)
-	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-		glGenerateMipmap(GL_TEXTURE_2D);
-	}
-	else
-	{
-		std::cout << "Failed to load texture" << std::endl;
-	}
-	stbi_image_free(data);
-
-
-	_testMesh = std::make_shared<mte::Mesh>("Assets/Meshes/test.obj", "Test Object");
+	_myTestCamera = std::make_shared<Camera>();
+	_myTestCamera->SetPosition(glm::vec3(5, 5, 5));
+	_myTestCamera->LookAt(glm::vec3(0));
+	_myTestCamera->Projection = glm::perspective(glm::radians(60.0f), 1600.0f / 900.0f, 0.01f, 1000.0f);
 
 }
 
@@ -68,14 +26,44 @@ void TestScene::Resize(int Width, int Height)
 
 void TestScene::virtualUpdate(float dt)
 {
+
+	glm::vec3 movement = glm::vec3(0.0f);
+	glm::vec3 rotation = glm::vec3(0.0f);
+	float speed = 1.0f;
+	float rotSpeed = 1.0f;
+	if (_input.getKeyState(GLFW_KEY_W))
+		movement.z -= speed * dt;
+	if (_input.getKeyState(GLFW_KEY_S))
+		movement.z += speed * dt;
+	if (_input.getKeyState(GLFW_KEY_A))
+		movement.x -= speed * dt;
+	if (_input.getKeyState(GLFW_KEY_D))
+		movement.x += speed * dt;
+	if (_input.getKeyState(GLFW_KEY_SPACE))
+		movement.y += speed * dt;
+	if (_input.getKeyState(GLFW_KEY_LEFT_CONTROL))
+		movement.y -= speed * dt;
+
+	if (_input.getKeyState(GLFW_KEY_Q))
+		rotation.z -= rotSpeed * dt;
+	if (_input.getKeyState(GLFW_KEY_E))
+		rotation.z += rotSpeed * dt;
+	if (_input.getKeyState(GLFW_KEY_UP))
+		rotation.x -= rotSpeed * dt;
+	if (_input.getKeyState(GLFW_KEY_DOWN))
+		rotation.x += rotSpeed * dt;
+	if (_input.getKeyState(GLFW_KEY_LEFT))
+		rotation.y -= rotSpeed * dt;
+	if (_input.getKeyState(GLFW_KEY_RIGHT))
+		rotation.y += rotSpeed * dt;
+
+
+	_myTestCamera->Rotate(rotation);
+	_myTestCamera->Move(movement);
 	
 
-	_simpleShader->Bind();
-
-	glBindTexture(GL_TEXTURE_2D, texture);
-	glBindVertexArray(VAO);
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-
+	_meshShader->Bind();
+	_meshShader->SetUniform("a_ModelViewProjection", _myTestCamera->GetViewProjection());
 	_testMesh->draw();
 
 

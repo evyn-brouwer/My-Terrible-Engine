@@ -25,7 +25,7 @@ namespace mte {
 		Log,
 		CheckPoint,
 		Bounds,
-
+		LoadFail
 	};
 
 	struct Error {

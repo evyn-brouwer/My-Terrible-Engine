@@ -2,12 +2,14 @@
 
 #include <glad/glad.h>
 
-#include "RenderStuff/Mesh/Transform.h"
+#include "RenderStuff/Model/Transform.h"
 
 #include "Logging/Logger.h"
 
 #include <vector>
 #include <string>
+
+#include <stb_image.h>
 
 
 namespace mte {
@@ -15,7 +17,7 @@ namespace mte {
 	class Mesh
 	{
 	public:
-		Mesh(std::string filename, std::string name);
+		Mesh(std::string meshFile, std::string meshName,std::string texturefile, std::string textureName);
 		Mesh(Mesh& copy);
 		virtual ~Mesh();
 
@@ -28,6 +30,7 @@ namespace mte {
 		GLuint _VAO = 0;
 		GLuint _VBO = 0;
 
+		GLuint _texture;
 
 		unsigned _vertexCount = 0, _indexCount = 0;
 
@@ -41,8 +44,11 @@ namespace mte {
 		std::vector<float> _normals;
 
 
-		std::string _filename = "";
-		std::string _name = "";
+		std::string _meshFileName = "";
+		std::string _meshName = "";
+
+		std::string _textureFileName = "";
+		std::string _textureName = "";
 
 		std::shared_ptr<Transform> _transform;
 

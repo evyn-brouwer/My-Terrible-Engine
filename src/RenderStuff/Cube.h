@@ -1,6 +1,6 @@
 #pragma once
 #include "RenderStuff/QuadRenderer.h"
-#include "RenderStuff/Mesh/Transform.h"
+#include "RenderStuff/Model/Transform.h"
 #include "ShaderStuff/Shader.h"
 #include "RenderStuff/Camera.h"
 
@@ -13,7 +13,7 @@ public:
 
 	void draw();
 	
-	Transform _transform;
+	std::shared_ptr<Transform> _transform;
 	glm::vec3 _position;
 private:
 

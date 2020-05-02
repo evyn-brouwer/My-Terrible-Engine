@@ -25,7 +25,7 @@ void MenuScene::loadData()
 
 	meshShader = std::make_shared<mte::Shader>();
 	meshShader->Load("./Assets/Shaders/meshShader.vs", "./Assets/Shaders/meshShader.fs");
-	_testMesh = std::make_shared<mte::Mesh>("./Assets/Meshes/test.obj","Test Object");
+
 }
 
 void MenuScene::Resize(int Width, int Height)
@@ -74,18 +74,11 @@ void MenuScene::virtualUpdate(float dt)
 	myTestCamera->Rotate(rotation);
 	myTestCamera->Move(movement);
 
-	//myTestCube->_transform._transformMat = myTestCube->_transform.rotate(glm::vec3(1.0f, 0.0, 0.0), 45.0f * dt);
-	//
-	//myTestCube->draw();
-	//
-	//mytestChunk->draw();
-
-
+	myTestCube->_transform->_transformMat = myTestCube->_transform->rotate(glm::vec3(1.0f, 0.0, 0.0), 45.0f * dt);
 	
+	myTestCube->draw();
+	
+	mytestChunk->draw();
 
 
-	meshShader->Bind();
-	meshShader->SetUniform("a_ModelViewProjection",myTestCamera->GetViewProjection());
-
-	_testMesh->draw();
 }

@@ -11,7 +11,6 @@ class Transform
 public:
 	Transform() {
 		_position = &_translateMat[3];
-		_transformMat = std::make_shared<glm::mat4>(1.0f);
 	}
 
 	/*
@@ -28,9 +27,9 @@ public:
 	const glm::mat4& rotate(const glm::vec3& rotateOn, float rotationAngle);
 	const glm::mat4& scale(const glm::vec3& scaleVec, float sizeScalar);
 
-	std::shared_ptr<glm::mat4> _transformMat;
+	glm::mat4 _transformMat{1.0f};
 
-	std::shared_ptr<glm::mat4> _parentTransform = NULL;//TO DO
+	std::shared_ptr<glm::mat4> _parentTransform;
 	glm::mat4 _worldTransformMat{ 1.0f };
 
 	glm::vec4* _position = nullptr;

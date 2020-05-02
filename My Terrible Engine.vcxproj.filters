@@ -66,13 +66,13 @@
     <ClCompile Include="src\RenderStuff\ShaderStuff\Shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\RenderStuff\Mesh\Mesh.cpp">
+    <ClCompile Include="src\RenderStuff\Model\Mesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\RenderStuff\Mesh\Transform.cpp">
+    <ClCompile Include="src\RenderStuff\Model\Model.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\RenderStuff\Mesh\Model.cpp">
+    <ClCompile Include="src\RenderStuff\Model\Transform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -122,25 +122,25 @@
     <ClInclude Include="src\Logging\Logger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\RenderStuff\Mesh\Mesh.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\RenderStuff\ShaderStuff\Shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="external\stb_image.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\RenderStuff\Mesh\Model.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\RenderStuff\Mesh\Transform.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Resources\ResourceManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Resources\Types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RenderStuff\Model\Mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RenderStuff\Model\Model.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RenderStuff\Model\Transform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

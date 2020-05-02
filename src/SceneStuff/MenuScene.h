@@ -5,11 +5,13 @@
 #include "WorldStuff/Block.h"
 #include "WorldStuff/Chunk.h"
 
-#include "RenderStuff/Mesh/Mesh.h"
+#include "RenderStuff/Model/Mesh.h"
 
 #include <glm/gtc/quaternion.hpp>
 
 #include <memory>
+
+#include <stb_image.h>
 
 class MenuScene : public mte::Scene
 {
@@ -29,5 +31,4 @@ private:
 	std::shared_ptr<Chunk> mytestChunk = NULL;
 
 	std::shared_ptr<mte::Shader> meshShader;
-	std::shared_ptr<mte::Mesh> _testMesh;
 };
