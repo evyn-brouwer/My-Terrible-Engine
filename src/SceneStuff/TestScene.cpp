@@ -15,12 +15,16 @@ void TestScene::loadData()
 	_myTestCamera->LookAt(glm::vec3(0));
 	_myTestCamera->Projection = glm::perspective(glm::radians(60.0f), 1600.0f / 900.0f, 0.01f, 1000.0f);
 
-	_myTestContainer = std::make_shared<mte::MeshContainer>(_myTestCamera,_resources.createMesh("Assets/Meshes/test.obj", "Test Mesh", "Assets/Textures/container.jpg", "Test Texture"),_resources.createShader("meshShader", "./Assets/Shaders/meshShader.vs", "./Assets/Shaders/meshShader.fs"));
-	_myTestContainer2 = std::make_shared<mte::MeshContainer>(_myTestCamera, _resources.createMesh("Assets/Meshes/test.obj", "Test Mesh", "Assets/Textures/container.jpg", "Test Texture"), _resources.createShader("meshShader", "./Assets/Shaders/meshShader.vs", "./Assets/Shaders/meshShader.fs"));
+
+	_testModel = std::make_shared<mte::Model>();
+	_testModel->addMesh(std::make_shared<mte::MeshContainer>("box0",_myTestCamera, _resources.createMesh("Assets/Meshes/test.obj", "Test Mesh", "Assets/Textures/container.jpg", "Test Texture"), _resources.createShader("meshShader", "./Assets/Shaders/meshShader.vs", "./Assets/Shaders/meshShader.fs")));
+	_testModel->addMesh(std::make_shared<mte::MeshContainer>("box1",_myTestCamera, _resources.createMesh("Assets/Meshes/test.obj", "Test Mesh", "Assets/Textures/container.jpg", "Test Texture"), _resources.createShader("meshShader", "./Assets/Shaders/meshShader.vs", "./Assets/Shaders/meshShader.fs")));
+
 }
 
 void TestScene::Resize(int Width, int Height)
 {
+	_myTestCamera->Projection = glm::perspective(glm::radians(60.0f), (float)Width / (float)Height, 0.01f, 1000.0f);
 }
 
 void TestScene::virtualUpdate(float dt)
@@ -60,12 +64,12 @@ void TestScene::virtualUpdate(float dt)
 	_myTestCamera->Rotate(rotation);
 	_myTestCamera->Move(movement);
 	
+	std::shared_ptr<mte::MeshContainer> tempModel = _testModel->getMesh("box1");
+	if (tempModel != NULL) {
+		tempModel->_tranform.translate(glm::vec3(0,0.05,0));
+	}
 
-	_myTestContainer->update(dt);
-	_myTestContainer->draw();
-
-	_myTestContainer2->update(dt);
-	_myTestContainer2->_tranform.translate(glm::vec3(0,0.1,0));
-	_myTestContainer2->draw();
+	_testModel->update(dt);
+	_testModel->draw();
 
 }

@@ -34,8 +34,6 @@ namespace mte {
 
 		unsigned _vertexCount = 0, _indexCount = 0;
 
-
-
 		bool _loaded = false;
 
 		std::vector<float> _master;
@@ -45,11 +43,8 @@ namespace mte {
 
 
 		std::string _meshFileName = "";
-		
 
 		std::string _textureFileName = "";
-		
-
 
 		bool active = true;
 	};
