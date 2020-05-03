@@ -5,7 +5,6 @@ mte::Shader::Shader(std::string shaderName, std::string vs_source, std::string f
 {
 	myShaderHandle = glCreateProgram();
 	Load(_vs_source.c_str(), _fs_source.c_str());
-
 }
 
 mte::Shader::~Shader()

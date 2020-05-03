@@ -9,7 +9,7 @@ TestScene::TestScene(GLFWwindow* window, std::string sceneName)
 void TestScene::loadData()
 {
 
-	_meshShader = std::make_shared<mte::Shader>("meshShader","./Assets/Shaders/meshShader.vs", "./Assets/Shaders/meshShader.fs");
+	_meshShader = _resources.createShader("meshShader", "./Assets/Shaders/meshShader.vs", "./Assets/Shaders/meshShader.fs");
 
 	_testMesh = std::make_shared<mte::Mesh>("Assets/Meshes/test.obj", "Test Mesh", "Assets/Textures/container.jpg","Test Texture");
 

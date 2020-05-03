@@ -20,6 +20,9 @@ namespace mte {
 
 		virtual void draw();
 
+		std::string _meshName = "";
+		std::string _textureName = "";
+
 	private:
 		Logger _logger;
 		bool loadData();
@@ -42,10 +45,10 @@ namespace mte {
 
 
 		std::string _meshFileName = "";
-		std::string _meshName = "";
+		
 
 		std::string _textureFileName = "";
-		std::string _textureName = "";
+		
 
 
 		bool active = true;

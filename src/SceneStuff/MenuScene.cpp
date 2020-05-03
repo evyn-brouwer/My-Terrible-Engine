@@ -9,7 +9,8 @@ MenuScene::MenuScene(GLFWwindow* window, std::string sceneName)
 
 void MenuScene::loadData()
 {
-	myTestShader = std::make_shared<mte::Shader>("testShader","./Assets/Shaders/testShader.vs", "./Assets/Shaders/testShader.fs");
+	
+	myTestShader = _resources.createShader("testShader", "./Assets/Shaders/testShader.vs", "./Assets/Shaders/testShader.fs");
 
 
 	myTestCamera = std::make_shared<Camera>();
@@ -21,8 +22,8 @@ void MenuScene::loadData()
 
 	mytestChunk = std::make_shared<Chunk>(myTestShader, myTestCamera);
 
-
-	meshShader = std::make_shared<mte::Shader>("meshShader","./Assets/Shaders/meshShader.vs", "./Assets/Shaders/meshShader.fs");
+	
+	meshShader = _resources.createShader("meshShader", "./Assets/Shaders/meshShader.vs", "./Assets/Shaders/meshShader.fs");
 
 }
 

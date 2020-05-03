@@ -5,6 +5,8 @@
 #include "WorldStuff/Block.h"
 #include "WorldStuff/Chunk.h"
 
+#include "Resources/ResourceManager.h"
+
 #include "RenderStuff/Model/Mesh.h"
 
 #include <glm/gtc/quaternion.hpp>
@@ -31,4 +33,7 @@ private:
 	std::shared_ptr<Chunk> mytestChunk = NULL;
 
 	std::shared_ptr<mte::Shader> meshShader;
+
+
+	mte::ResourceManager _resources;
 };

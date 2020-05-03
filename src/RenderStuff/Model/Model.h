@@ -9,7 +9,7 @@ namespace mte {
 
 		void draw();
 
-		std::shared_ptr<Transform> getTransform() { return _transform; }
+		Transform getTransform() { return _transform; }
 
 	private:
 
@@ -18,6 +18,6 @@ namespace mte {
 
 		bool _active = true;
 
-		std::shared_ptr<Transform> _transform;
+		Transform _transform;
 	};
 }
