@@ -10,12 +10,12 @@
 namespace mte {
 	class Shader {
 	public:
-		Shader();
+		Shader(std::string shaderName, std::string vs_source, std::string fs_source);
 		~Shader();
 		char* readFile(const char* filename);
 
 		void compile(const char* vs_source, const char* fs_source);
-		void Load(const char* vsFile, const char* fsFile);
+		void Load(const char* vsFile,const char* fsFile);
 		void Bind();
 
 		void SetUniform(const char* name, const glm::mat4& value);
@@ -24,9 +24,14 @@ namespace mte {
 		void SetUniform(const char* name, const float& value);
 	private:
 		GLuint __CompileShaderPart(const char* source, GLenum type);
-		GLuint myShaderHandle;
+		GLuint myShaderHandle = 0;
 
 		Logger _logger;
+
+		std::string _shaderName;
+		std::string _vs_source;
+		std::string _fs_source;
+
 
 	};
 }

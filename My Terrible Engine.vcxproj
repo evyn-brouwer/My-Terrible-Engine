@@ -99,6 +99,7 @@
     <ClCompile Include="src\RenderStuff\Model\Transform.cpp" />
     <ClCompile Include="src\RenderStuff\QuadRenderer.cpp" />
     <ClCompile Include="src\RenderStuff\Structs.cpp" />
+    <ClCompile Include="src\Resources\ResourceManager.cpp" />
     <ClCompile Include="src\SceneStuff\MenuScene.cpp" />
     <ClCompile Include="src\SceneStuff\Scene.cpp" />
     <ClCompile Include="src\SceneStuff\SceneManager.cpp" />
@@ -115,6 +116,7 @@
     <ClInclude Include="src\Input\InputHandler.h" />
     <ClInclude Include="src\Logging\Logger.h" />
     <ClInclude Include="src\RenderStuff\Model\Mesh.h" />
+    <ClInclude Include="src\RenderStuff\Model\MeshContainer.h" />
     <ClInclude Include="src\RenderStuff\Model\Model.h" />
     <ClInclude Include="src\RenderStuff\Model\Transform.h" />
     <ClInclude Include="src\RenderStuff\Camera.h" />

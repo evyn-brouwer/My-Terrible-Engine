@@ -1,8 +1,11 @@
 #include "Shader.h"
 
-mte::Shader::Shader()
+mte::Shader::Shader(std::string shaderName, std::string vs_source, std::string fs_source)
+	:_shaderName(shaderName),_vs_source(vs_source),_fs_source(fs_source)
 {
 	myShaderHandle = glCreateProgram();
+	Load(_vs_source.c_str(), _fs_source.c_str());
+
 }
 
 mte::Shader::~Shader()
@@ -10,7 +13,7 @@ mte::Shader::~Shader()
 	glDeleteProgram(myShaderHandle);
 }
 
-void mte::Shader::compile(const char* vs_source, const char* fs_source)
+void mte::Shader::compile(const char* vs_source,const char* fs_source)
 {
 	// Compile our two shader programs
 	GLuint vs = __CompileShaderPart(vs_source, GL_VERTEX_SHADER);
@@ -116,7 +119,7 @@ char* mte::Shader::readFile(const char* filename) {
 	}
 }
 
-void mte::Shader::Load(const char* vsFile, const char* fsFile)
+void mte::Shader::Load(const char* vsFile,const  char* fsFile)
 {
 	// Load in our shaders
 	char* vs_source = readFile(vsFile);

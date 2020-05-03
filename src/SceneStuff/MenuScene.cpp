@@ -9,8 +9,7 @@ MenuScene::MenuScene(GLFWwindow* window, std::string sceneName)
 
 void MenuScene::loadData()
 {
-	myTestShader = std::make_shared<mte::Shader>();
-	myTestShader->Load("./Assets/Shaders/testShader.vs","./Assets/Shaders/testShader.fs");
+	myTestShader = std::make_shared<mte::Shader>("testShader","./Assets/Shaders/testShader.vs", "./Assets/Shaders/testShader.fs");
 
 
 	myTestCamera = std::make_shared<Camera>();
@@ -23,8 +22,7 @@ void MenuScene::loadData()
 	mytestChunk = std::make_shared<Chunk>(myTestShader, myTestCamera);
 
 
-	meshShader = std::make_shared<mte::Shader>();
-	meshShader->Load("./Assets/Shaders/meshShader.vs", "./Assets/Shaders/meshShader.fs");
+	meshShader = std::make_shared<mte::Shader>("meshShader","./Assets/Shaders/meshShader.vs", "./Assets/Shaders/meshShader.fs");
 
 }
 
@@ -74,11 +72,9 @@ void MenuScene::virtualUpdate(float dt)
 	myTestCamera->Rotate(rotation);
 	myTestCamera->Move(movement);
 
-	myTestCube->_transform->_transformMat = myTestCube->_transform->rotate(glm::vec3(1.0f, 0.0, 0.0), 45.0f * dt);
+	myTestCube->_transform->_transformMat = myTestCube->_transform->rotate(glm::vec3(1.0f, 0.0, 0.0), 90.0f * dt);
 	
 	myTestCube->draw();
 	
 	mytestChunk->draw();
-
-
 }

@@ -1,6 +1,5 @@
 #pragma once
-#include "RenderStuff/Mesh/Mesh.h"
-#include "RenderStuff/Mesh/Transform.h"
+#include "RenderStuff/Model/MeshContainer.h"
 
 
 namespace mte {
@@ -15,7 +14,7 @@ namespace mte {
 	private:
 
 		
-		std::vector<Mesh> _meshes;
+		std::vector<MeshContainer> _meshes;
 
 		bool _active = true;
 

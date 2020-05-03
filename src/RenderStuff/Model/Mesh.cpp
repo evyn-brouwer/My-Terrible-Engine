@@ -20,7 +20,6 @@ namespace mte {
 mte::Mesh::Mesh(std::string meshFileName,std::string meshName, std::string texturefile, std::string textureName)
 	:_meshFileName(meshFileName),_meshName(meshName),_textureFileName(texturefile),_textureName(textureName)
 {
-	_transform = std::make_shared<Transform>();
 	loadData();
 }
 
