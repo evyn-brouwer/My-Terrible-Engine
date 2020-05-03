@@ -22,13 +22,15 @@ namespace mte {
 		void SetUniform(const char* name, const glm::mat3& value);
 		void SetUniform(const char* name, const glm::vec3& value);
 		void SetUniform(const char* name, const float& value);
+
+		std::string _shaderName;
 	private:
 		GLuint __CompileShaderPart(const char* source, GLenum type);
 		GLuint myShaderHandle = 0;
 
 		Logger _logger;
 
-		std::string _shaderName;
+		
 		std::string _vs_source;
 		std::string _fs_source;
 
