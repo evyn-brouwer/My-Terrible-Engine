@@ -9,17 +9,14 @@ TestScene::TestScene(GLFWwindow* window, std::string sceneName)
 void TestScene::loadData()
 {
 
-	_meshShader = _resources.createShader("meshShader", "./Assets/Shaders/meshShader.vs", "./Assets/Shaders/meshShader.fs");
-
-	_testMesh = std::make_shared<mte::Mesh>("Assets/Meshes/test.obj", "Test Mesh", "Assets/Textures/container.jpg","Test Texture");
 
 	_myTestCamera = std::make_shared<Camera>();
-	_myTestCamera->SetPosition(glm::vec3(5, 5, 5));
+	_myTestCamera->SetPosition(glm::vec3(5, 0, 5));
 	_myTestCamera->LookAt(glm::vec3(0));
 	_myTestCamera->Projection = glm::perspective(glm::radians(60.0f), 1600.0f / 900.0f, 0.01f, 1000.0f);
 
-	_myTestContainer = std::make_shared<mte::MeshContainer>(_myTestCamera,_testMesh,_resources.createShader("meshShader", "./Assets/Shaders/meshShader.vs", "./Assets/Shaders/meshShader.fs"));
-
+	_myTestContainer = std::make_shared<mte::MeshContainer>(_myTestCamera,_resources.createMesh("Assets/Meshes/test.obj", "Test Mesh", "Assets/Textures/container.jpg", "Test Texture"),_resources.createShader("meshShader", "./Assets/Shaders/meshShader.vs", "./Assets/Shaders/meshShader.fs"));
+	_myTestContainer2 = std::make_shared<mte::MeshContainer>(_myTestCamera, _resources.createMesh("Assets/Meshes/test.obj", "Test Mesh", "Assets/Textures/container.jpg", "Test Texture"), _resources.createShader("meshShader", "./Assets/Shaders/meshShader.vs", "./Assets/Shaders/meshShader.fs"));
 }
 
 void TestScene::Resize(int Width, int Height)
@@ -64,11 +61,11 @@ void TestScene::virtualUpdate(float dt)
 	_myTestCamera->Move(movement);
 	
 
-	//_meshShader->Bind();
-	//_meshShader->SetUniform("a_ModelViewProjection", _myTestCamera->GetViewProjection());
-	//_testMesh->draw();
+	_myTestContainer->update(dt);
 	_myTestContainer->draw();
 
-
+	_myTestContainer2->update(dt);
+	_myTestContainer2->_tranform.translate(glm::vec3(0,0.1,0));
+	_myTestContainer2->draw();
 
 }

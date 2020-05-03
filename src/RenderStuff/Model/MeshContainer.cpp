@@ -12,3 +12,8 @@ void mte::MeshContainer::draw()
 	_shader->SetUniform("a_ModelViewProjection",_camera->GetViewProjection() *_tranform._worldTransformMat);
 	_mesh->draw();
 }
+
+void mte::MeshContainer::update(float dt)
+{
+	_tranform.update();
+}
