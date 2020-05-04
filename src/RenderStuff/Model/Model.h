@@ -12,7 +12,7 @@ namespace mte {
 		void draw();
 		void update(float dt);
 		
-		std::shared_ptr<mte::MeshContainer> getMesh(std::string meshTag);
+		std::shared_ptr<mte::MeshContainer> getMesh(std::string meshTag);  
 
 		Transform getTransform() { return _transform; }
 

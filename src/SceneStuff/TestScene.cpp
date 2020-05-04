@@ -17,7 +17,7 @@ void TestScene::loadData()
 
 
 	_testModel = std::make_shared<mte::Model>();
-	_testModel->addMesh(std::make_shared<mte::MeshContainer>("box0",_myTestCamera, _resources.createMesh("Assets/Meshes/test.obj", "Test Mesh", "Assets/Textures/container.jpg", "Test Texture"), _resources.createShader("meshShader", "./Assets/Shaders/meshShader.vs", "./Assets/Shaders/meshShader.fs")));
+	_testModel->addMesh(std::make_shared<mte::MeshContainer>("box0",_myTestCamera, _resources.createMesh("Assets/Meshes/test.obj", "Test Mesh", "Assets/Textures/container.jpg", "Test Texture"), _resources.createShader("testMesh", "./Assets/Shaders/testShader.vs", "./Assets/Shaders/testShader.fs")));
 	_testModel->addMesh(std::make_shared<mte::MeshContainer>("box1",_myTestCamera, _resources.createMesh("Assets/Meshes/test.obj", "Test Mesh", "Assets/Textures/container.jpg", "Test Texture"), _resources.createShader("meshShader", "./Assets/Shaders/meshShader.vs", "./Assets/Shaders/meshShader.fs")));
 
 }
