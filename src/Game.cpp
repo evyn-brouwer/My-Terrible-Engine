@@ -38,6 +38,7 @@ static void mouse_button_callback(GLFWwindow* window, int button, int action, in
 mte::Game::Game(std::string gameName, GLuint width, GLuint height)
 	: _gameName(gameName)
 {
+	stbi_set_flip_vertically_on_load(true);
 	_width = width;
 	_height = height;
 	_gameWindow = NULL;

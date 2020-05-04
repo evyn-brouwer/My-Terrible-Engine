@@ -17,8 +17,8 @@ void TestScene::loadData()
 
 
 	_testModel = std::make_shared<mte::Model>();
-	_testModel->addMesh(std::make_shared<mte::MeshContainer>("box0",_myTestCamera, _resources.createMesh("Assets/Meshes/test.obj", "Test Mesh", "Assets/Textures/container.jpg", "Test Texture"), _resources.createShader("testMesh", "./Assets/Shaders/testShader.vs", "./Assets/Shaders/testShader.fs")));
-	_testModel->addMesh(std::make_shared<mte::MeshContainer>("box1",_myTestCamera, _resources.createMesh("Assets/Meshes/test.obj", "Test Mesh", "Assets/Textures/container.jpg", "Test Texture"), _resources.createShader("meshShader", "./Assets/Shaders/meshShader.vs", "./Assets/Shaders/meshShader.fs")));
+	_testModel->addMesh(std::make_shared<mte::MeshContainer>("box0",_myTestCamera, _resources.createMesh("Assets/Meshes/test.obj", "Test Mesh", "Assets/Textures/meme.jpg", "Test Texture"), _resources.createShader("testMesh", "./Assets/Shaders/testShader.vs", "./Assets/Shaders/testShader.fs")));
+	_testModel->addMesh(std::make_shared<mte::MeshContainer>("box1",_myTestCamera, _resources.createMesh("Assets/Meshes/box.obj", "Box Mesh", "Assets/Textures/boxdiffuse.jpg", "Box Texture"), _resources.createShader("meshShader", "./Assets/Shaders/meshShader.vs", "./Assets/Shaders/meshShader.fs")));
 
 }
 
@@ -66,7 +66,7 @@ void TestScene::virtualUpdate(float dt)
 	
 	std::shared_ptr<mte::MeshContainer> tempModel = _testModel->getMesh("box1");
 	if (tempModel != NULL) {
-		tempModel->_tranform.translate(glm::vec3(0,0.05,0));
+		tempModel->_tranform.translate(glm::vec3(0,0.005,0));
 	}
 
 	_testModel->update(dt);
