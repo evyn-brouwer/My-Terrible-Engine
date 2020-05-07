@@ -160,6 +160,24 @@ void mte::Shader::SetUniform(const char* name, const float& value) {
 	}
 }
 
+void mte::Shader::drawCubes()
+{
+	for (auto x : _lightCubes) {
+		if (x->_drawn != true) {
+
+		}
+
+		x->_drawn = true;
+	}
+}
+
+void mte::Shader::updateCubes()
+{
+	for (auto x : _lightCubes) {
+		x->_drawn = false;
+	}
+}
+
 GLuint mte::Shader::__CompileShaderPart(const char* source, GLenum type)
 {
 	GLuint result = glCreateShader(type);

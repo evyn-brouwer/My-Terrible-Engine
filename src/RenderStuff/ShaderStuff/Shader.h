@@ -3,10 +3,11 @@
 #include <glad/glad.h>
 #include <iostream>
 #include <fstream>
+#include <vector>
 
+#include "RenderStuff/Lighting/LightCube.h"
 #include "Logging/Logger.h"
 
-#include <GLM/glm.hpp>
 namespace mte {
 	class Shader {
 	public:
@@ -24,6 +25,10 @@ namespace mte {
 		void SetUniform(const char* name, const float& value);
 
 		std::string _shaderName;
+
+
+		void drawCubes();
+		void updateCubes();
 	private:
 		GLuint __CompileShaderPart(const char* source, GLenum type);
 		GLuint myShaderHandle = 0;
@@ -34,6 +39,7 @@ namespace mte {
 		std::string _vs_source;
 		std::string _fs_source;
 
-
+		
+		std::vector<std::shared_ptr<LightCube>> _lightCubes;
 	};
 }

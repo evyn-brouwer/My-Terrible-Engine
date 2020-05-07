@@ -40,7 +40,7 @@ mte::Mesh::~Mesh()
 
 void mte::Mesh::draw()
 {
-	if (active) {
+	if (_active) {
 		glBindTexture(GL_TEXTURE_2D, _texture);
 		glBindVertexArray(_VAO);
 		glDrawArrays(GL_TRIANGLES, 0, _vertexCount);

@@ -46,6 +46,6 @@ namespace mte {
 
 		std::string _textureFileName = "";
 
-		bool active = true;
+		bool _active = true;
 	};
 }

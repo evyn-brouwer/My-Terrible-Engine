@@ -12,6 +12,8 @@ namespace mte {
 		std::shared_ptr<mte::Mesh> createMesh(std::string meshFile, std::string meshName, std::string texturefile, std::string textureName);
 		static std::vector<std::shared_ptr<mte::Mesh>> _meshes;
 
+		void drawLightCubes();
+		void updateDrawCubes();
 
 	private:
 

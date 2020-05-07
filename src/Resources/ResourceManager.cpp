@@ -28,3 +28,17 @@ std::shared_ptr<mte::Mesh> mte::ResourceManager::createMesh(std::string meshFile
 	_meshes.push_back(tempMesh);
 	return tempMesh;
 }
+
+void mte::ResourceManager::drawLightCubes()
+{
+	for (auto x : _shaders) {
+		x->drawCubes();
+	}
+}
+
+void mte::ResourceManager::updateDrawCubes()
+{
+	for (auto x : _shaders) {
+		x->updateCubes();
+	}
+}
