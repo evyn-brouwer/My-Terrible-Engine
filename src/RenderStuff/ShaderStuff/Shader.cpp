@@ -160,11 +160,15 @@ void mte::Shader::SetUniform(const char* name, const float& value) {
 	}
 }
 
-void mte::Shader::drawCubes()
+void mte::Shader::drawCubes(std::shared_ptr<Camera> camera)
 {
+	_lightCubeShader->Bind();
 	for (auto x : _lightCubes) {
 		if (x->_drawn != true) {
-
+			_lightCubeShader->SetUniform("a_ModelViewProjection", camera->GetViewProjection());
+			_lightCubeShader->SetUniform("a_colour", x->_colour);
+			_lightCubeShader->SetUniform("a_pos",x->_pos);
+			x->drawCube();
 		}
 
 		x->_drawn = true;

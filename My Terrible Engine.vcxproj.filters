@@ -166,5 +166,7 @@
     <None Include="Assets\Shaders\simplestShader.fs" />
     <None Include="Assets\Shaders\meshShader.vs" />
     <None Include="Assets\Shaders\meshShader.fs" />
+    <None Include="Assets\Shaders\lightCubeShader.vs" />
+    <None Include="Assets\Shaders\lightCubeShader.fs" />
   </ItemGroup>
 </Project>

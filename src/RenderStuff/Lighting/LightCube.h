@@ -21,7 +21,6 @@ namespace mte {
 	private:
 		GLuint _VAO = 0;
 		GLuint _VBO = 0;
-		unsigned _vertexCount = 24, _indexCount = 0;
 
 		std::vector<float> _master;
 	};

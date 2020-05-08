@@ -5,6 +5,12 @@
 std::vector<std::shared_ptr<mte::Shader>> mte::ResourceManager::_shaders;
 std::vector<std::shared_ptr<mte::Mesh>> mte::ResourceManager::_meshes;
 
+
+mte::ResourceManager::ResourceManager()
+{
+	_lightCubeShader = createShader("lightCubeShader", "./Assets/Shaders/lightCubeShader.vs", "./Assets/Shaders/lightCubeShader.fs");
+}
+
 std::shared_ptr<mte::Shader> mte::ResourceManager::createShader(std::string shaderName, std::string vsSource, std::string fsSource)
 {
 	for (auto x : _shaders) {
@@ -13,8 +19,19 @@ std::shared_ptr<mte::Shader> mte::ResourceManager::createShader(std::string shad
 		}
 	}
 	std::shared_ptr<mte::Shader> tempShader = std::make_shared<mte::Shader>(shaderName, vsSource, fsSource);
+	tempShader->_lightCubeShader = _lightCubeShader;
 	_shaders.push_back(tempShader);
 	return tempShader;
+}
+
+std::shared_ptr<mte::Shader> mte::ResourceManager::getShader(std::string shaderName)
+{
+	for (auto x : _shaders) {
+		if (x->_shaderName == shaderName) {
+			return x;
+		}
+	}
+	return NULL;
 }
 
 std::shared_ptr<mte::Mesh> mte::ResourceManager::createMesh(std::string meshFile, std::string meshName, std::string texturefile, std::string textureName)
@@ -29,10 +46,11 @@ std::shared_ptr<mte::Mesh> mte::ResourceManager::createMesh(std::string meshFile
 	return tempMesh;
 }
 
-void mte::ResourceManager::drawLightCubes()
+void mte::ResourceManager::drawLightCubes(std::shared_ptr<Camera> camera)
 {
 	for (auto x : _shaders) {
-		x->drawCubes();
+		if(x->_shaderName!="lightCubeShader")
+			x->drawCubes(camera);
 	}
 }
 

@@ -8,17 +8,17 @@ TestScene::TestScene(GLFWwindow* window, std::string sceneName)
 
 void TestScene::loadData()
 {
-
-
 	_myTestCamera = std::make_shared<Camera>();
 	_myTestCamera->SetPosition(glm::vec3(5, 0, 5));
-	_myTestCamera->LookAt(glm::vec3(0));
 	_myTestCamera->Projection = glm::perspective(glm::radians(60.0f), 1600.0f / 900.0f, 0.01f, 1000.0f);
 
 
 	_testModel = std::make_shared<mte::Model>();
-	_testModel->addMesh(std::make_shared<mte::MeshContainer>("box0",_myTestCamera, _resources.createMesh("Assets/Meshes/test.obj", "Test Mesh", "Assets/Textures/meme.jpg", "Test Texture"), _resources.createShader("testMesh", "./Assets/Shaders/testShader.vs", "./Assets/Shaders/testShader.fs")));
+	_testModel->addMesh(std::make_shared<mte::MeshContainer>("box0",_myTestCamera, _resources.createMesh("Assets/Meshes/test.obj", "Test Mesh", "Assets/Textures/meme.jpg", "Test Texture"), _resources.createShader("testMeshShader", "./Assets/Shaders/testShader.vs", "./Assets/Shaders/testShader.fs")));
 	_testModel->addMesh(std::make_shared<mte::MeshContainer>("box1",_myTestCamera, _resources.createMesh("Assets/Meshes/box.obj", "Box Mesh", "Assets/Textures/boxdiffuse.jpg", "Box Texture"), _resources.createShader("meshShader", "./Assets/Shaders/meshShader.vs", "./Assets/Shaders/meshShader.fs")));
+
+	std::shared_ptr<mte::LightCube> tempLight = std::make_shared<mte::LightCube>(glm::vec3(5,5,5),glm::vec3(1,1,1));
+	_resources.getShader("testMeshShader")->_lightCubes.push_back(tempLight);
 
 }
 
@@ -64,9 +64,16 @@ void TestScene::virtualUpdate(float dt)
 	_myTestCamera->Rotate(rotation);
 	_myTestCamera->Move(movement);
 	
+
+	_resources.drawLightCubes(_myTestCamera);
+	_resources.updateDrawCubes();
+
+
+
+
 	std::shared_ptr<mte::MeshContainer> tempModel = _testModel->getMesh("box1");
 	if (tempModel != NULL) {
-		tempModel->_tranform.translate(glm::vec3(0,0.005,0));
+		tempModel->_tranform.translate(glm::vec3(0,0.01*dt,0));
 	}
 
 	_testModel->update(dt);

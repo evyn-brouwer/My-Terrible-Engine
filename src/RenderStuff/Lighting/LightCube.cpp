@@ -1,6 +1,7 @@
 #include "LightCube.h"
 
 mte::LightCube::LightCube(glm::vec3 pos, glm::vec3 colour)
+	:_pos(pos),_colour(colour)
 {
 	glGenVertexArrays(1, &_VAO);
 	glGenBuffers(1, &_VBO);
@@ -215,7 +216,8 @@ mte::LightCube::LightCube(glm::vec3 pos, glm::vec3 colour)
 void mte::LightCube::drawCube()
 {
 	if (_active) {
+
 		glBindVertexArray(_VAO);
-		glDrawArrays(GL_TRIANGLES, 0, _vertexCount);
+		glDrawArrays(GL_TRIANGLES, 0, _master.size()/3);
 	}
 }

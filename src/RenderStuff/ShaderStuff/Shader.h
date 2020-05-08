@@ -8,6 +8,8 @@
 #include "RenderStuff/Lighting/LightCube.h"
 #include "Logging/Logger.h"
 
+#include "RenderStuff/Camera.h"
+
 namespace mte {
 	class Shader {
 	public:
@@ -27,7 +29,11 @@ namespace mte {
 		std::string _shaderName;
 
 
-		void drawCubes();
+		std::shared_ptr<Shader>_lightCubeShader;
+
+		std::vector<std::shared_ptr<LightCube>> _lightCubes;
+
+		void drawCubes(std::shared_ptr<Camera> camera);
 		void updateCubes();
 	private:
 		GLuint __CompileShaderPart(const char* source, GLenum type);
@@ -40,6 +46,6 @@ namespace mte {
 		std::string _fs_source;
 
 		
-		std::vector<std::shared_ptr<LightCube>> _lightCubes;
+		
 	};
 }

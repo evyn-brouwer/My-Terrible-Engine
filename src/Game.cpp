@@ -133,7 +133,7 @@ void mte::Game::runGame()
 
 	static float prevFrame = (float)glfwGetTime();
 	while (!glfwWindowShouldClose(_gameWindow)) {
-		glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+		glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 
 		
 
