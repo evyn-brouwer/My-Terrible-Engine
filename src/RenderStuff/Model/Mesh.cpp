@@ -94,8 +94,8 @@ bool mte::Mesh::loadData()
 		else if (inputString[0] == 'v' && inputString[1] == 'n') {
 			glm::vec3 normData{ 0,0,0 };
 
-			int error = std::sscanf(inputString, "v %f %f %f", &normData.x, &normData.y, &normData.z);
-			vertexData.push_back(normData);
+			int error = std::sscanf(inputString, "vn %f %f %f", &normData.x, &normData.y, &normData.z);
+			normalData.push_back(normData);
 		}
 		else if (inputString[0] == 'f' && inputString[1] == ' ') {
 			faces.emplace_back();

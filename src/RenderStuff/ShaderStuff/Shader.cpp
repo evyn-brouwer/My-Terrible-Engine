@@ -160,6 +160,7 @@ void mte::Shader::SetUniform(const char* name, const float& value) {
 	}
 }
 
+
 void mte::Shader::drawCubes(std::shared_ptr<Camera> camera)
 {
 	_lightCubeShader->Bind();

@@ -9,6 +9,12 @@
 
 
 namespace mte {
+	enum class lightType {
+		pointLight,
+		directionLight,
+
+	};
+
 	class LightCube {
 	public:
 		LightCube(glm::vec3 pos, glm::vec3 colour);

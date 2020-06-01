@@ -25,6 +25,8 @@ namespace mte {
 		void SetUniform(const char* name, const glm::mat3& value);
 		void SetUniform(const char* name, const glm::vec3& value);
 		void SetUniform(const char* name, const float& value);
+		void sendLights();
+
 
 		std::string _shaderName;
 

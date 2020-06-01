@@ -10,7 +10,15 @@ void mte::MeshContainer::draw()
 {
 	if (_active) {
 		_shader->Bind();
-		_shader->SetUniform("a_ModelViewProjection", _camera->GetViewProjection() * _tranform._worldTransformMat);
+		_shader->SetUniform("a_ViewProjection", _camera->GetViewProjection());
+		_shader->SetUniform("a_Model", _tranform._worldTransformMat);
+		if (_shader->_lightCubes.size()) { 
+			_shader->SetUniform("lightPos", _shader->_lightCubes[0]->_pos);
+			_shader->SetUniform("lightCol", _shader->_lightCubes[0]->_colour);
+		}
+		if (_camera != nullptr) {
+			_shader->SetUniform("viewPos", _camera->GetPosition());
+		}
 		_mesh->draw();
 	}
 }
