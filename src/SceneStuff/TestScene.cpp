@@ -17,7 +17,7 @@ void TestScene::loadData()
 	_testModel->addMesh(std::make_shared<mte::MeshContainer>("box0",_myTestCamera, _resources.createMesh("Assets/Meshes/test.obj", "Test Mesh", "Assets/Textures/meme.jpg", "Test Texture"), _resources.createShader("testMeshShader", "./Assets/Shaders/testShader.vs", "./Assets/Shaders/testShader.fs")));
 	_testModel->addMesh(std::make_shared<mte::MeshContainer>("box1",_myTestCamera, _resources.createMesh("Assets/Meshes/box.obj", "Box Mesh", "Assets/Textures/boxdiffuse.jpg", "Box Texture"), _resources.createShader("meshShader", "./Assets/Shaders/meshShader.vs", "./Assets/Shaders/meshShader.fs")));
 
-	std::shared_ptr<mte::LightCube> tempLight = std::make_shared<mte::LightCube>(glm::vec3(3,3,3),glm::vec3(1,1,1));
+	std::shared_ptr<mte::LightCube> tempLight = std::make_shared<mte::LightCube>(glm::vec3(5, 1, 6), glm::vec3(1, 1, 1), glm::vec3(1, 1, 1), glm::vec3(1, 1, 1));
 	_resources.getShader("meshShader")->_lightCubes.push_back(tempLight);
 
 }
@@ -79,4 +79,9 @@ void TestScene::virtualUpdate(float dt)
 	_testModel->update(dt);
 	_testModel->draw();
 
+	//std::shared_ptr<mte::Shader> _tempShader = _resources.getShader("meshShader");
+	//
+	//_tempShader->_lightCubes[0]->_diffuse.x = sin(glfwGetTime() * 2.0f);
+	//_tempShader->_lightCubes[0]->_diffuse.y = sin(glfwGetTime() * 0.7f);
+	//_tempShader->_lightCubes[0]->_diffuse.z = sin(glfwGetTime() * 1.3f);
 }

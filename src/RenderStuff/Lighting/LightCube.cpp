@@ -1,7 +1,7 @@
 #include "LightCube.h"
 
-mte::LightCube::LightCube(glm::vec3 pos, glm::vec3 colour)
-	:_pos(pos),_colour(colour)
+mte::LightCube::LightCube(glm::vec3 pos, glm::vec3 ambient,glm::vec3 diffuse, glm::vec3 specular)
+	:_pos(pos),_diffuse(diffuse),_specular(specular)
 {
 	glGenVertexArrays(1, &_VAO);
 	glGenBuffers(1, &_VBO);

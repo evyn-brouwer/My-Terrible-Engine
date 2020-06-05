@@ -13,12 +13,18 @@ void mte::MeshContainer::draw()
 		_shader->SetUniform("a_ViewProjection", _camera->GetViewProjection());
 		_shader->SetUniform("a_Model", _tranform._worldTransformMat);
 		if (_shader->_lightCubes.size()) { 
-			_shader->SetUniform("lightPos", _shader->_lightCubes[0]->_pos);
-			_shader->SetUniform("lightCol", _shader->_lightCubes[0]->_colour);
+			_shader->SetUniform("light.position", _shader->_lightCubes[0]->_pos);
+			_shader->SetUniform("light.diffuse", _shader->_lightCubes[0]->_diffuse);
+			_shader->SetUniform("light.specular", _shader->_lightCubes[0]->_specular);
+			_shader->SetUniform("light.ambient", _shader->_lightCubes[0]->_ambient);
 		}
 		if (_camera != nullptr) {
 			_shader->SetUniform("viewPos", _camera->GetPosition());
 		}
+		_shader->SetUniform("material.ambient", glm::vec3(1.0));
+		_shader->SetUniform("material.diffuse", glm::vec3(1.0));
+		_shader->SetUniform("material.specular", glm::vec3(1.0));
+		_shader->SetUniform("material.shininess", 32.0f);
 		_mesh->draw();
 	}
 }

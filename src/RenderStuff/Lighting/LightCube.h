@@ -12,13 +12,15 @@ namespace mte {
 	enum class lightType {
 		pointLight,
 		directionLight,
-
+		spotLight,
 	};
 
 	class LightCube {
 	public:
-		LightCube(glm::vec3 pos, glm::vec3 colour);
-		glm::vec3 _colour{ 1.0,1.0,1.0 };
+		LightCube(glm::vec3 pos, glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular);
+		glm::vec3 _ambient{ 1.0,1.0,1.0 };
+		glm::vec3 _diffuse{ 1.0,1.0,1.0 };
+		glm::vec3 _specular{ 1.0,1.0,1.0 };
 		glm::vec3 _pos{ 0.0,0.0,0.0 };
 
 		bool _drawn = false;
