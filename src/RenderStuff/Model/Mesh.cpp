@@ -23,6 +23,18 @@ mte::Mesh::Mesh(std::string meshFileName,std::string meshName, std::string textu
 	loadData(); 
 }
 
+mte::Mesh::Mesh(std::string meshFile, std::string meshName, std::string texturefile, std::string textureName, std::string specularFile, std::string specularName)
+	: _meshFileName(meshFile), _meshName(meshName), _textureFileName(texturefile), _textureName(textureName),_specularName(specularName),_specularFileName(specularFile)
+{
+	loadData();
+}
+
+mte::Mesh::Mesh(std::string meshFile, std::string meshName, std::string texturefile, std::string textureName, std::string specularFile, std::string specularName, std::string emissionFile, std::string emissionName)
+	: _meshFileName(meshFile), _meshName(meshName), _textureFileName(texturefile), _textureName(textureName), _specularName(specularName), _specularFileName(specularFile),_emissionName(emissionName),_emissionFileName(emissionFile)
+{
+	loadData();
+}
+
 
 mte::Mesh::Mesh(Mesh& copy)
 {
@@ -77,9 +89,9 @@ bool mte::Mesh::loadData()
 	}
 
 	while (!input.eof()) {
-		input.getline(inputString,128);
+		input.getline(inputString, 128);
 
-		if (inputString[0] == 'v' && inputString[1] == ' ') {  
+		if (inputString[0] == 'v' && inputString[1] == ' ') {
 			glm::vec3 vertData{ 0,0,0 };
 
 			int error = std::sscanf(inputString, "v %f %f %f", &vertData.x, &vertData.y, &vertData.z);
@@ -100,7 +112,7 @@ bool mte::Mesh::loadData()
 		else if (inputString[0] == 'f' && inputString[1] == ' ') {
 			faces.emplace_back();
 
-			int error = std::sscanf(inputString, "f %u/%u/%u %u/%u/%u %u/%u/%u", 
+			int error = std::sscanf(inputString, "f %u/%u/%u %u/%u/%u %u/%u/%u",
 				&faces.back().vertexesIndexex[0], &faces.back().textureIndexex[0], &faces.back().normalIndexex[0],
 				&faces.back().vertexesIndexex[1], &faces.back().textureIndexex[1], &faces.back().normalIndexex[1],
 				&faces.back().vertexesIndexex[2], &faces.back().textureIndexex[2], &faces.back().normalIndexex[2]);
@@ -125,7 +137,7 @@ bool mte::Mesh::loadData()
 				unPnormalData.push_back(normalData[faces[i].normalIndexex[j] - 1].z);
 			}
 		}
-		
+
 	}
 	_indexCount = faces.size();
 	_vertexCount = _indexCount * 3;
@@ -158,13 +170,13 @@ bool mte::Mesh::loadData()
 
 	glBindBuffer(GL_ARRAY_BUFFER, _VBO);
 
-	glBufferData(GL_ARRAY_BUFFER, _master.size()* sizeof(float),&_master[0],GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, _master.size() * sizeof(float), &_master[0], GL_STATIC_DRAW);
 
 	//vertices
-	glVertexAttribPointer(0,3,GL_FLOAT, GL_FALSE ,3 * sizeof(float),(void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 
 	//uvs
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)(unPvertexData.size()*sizeof(float)));
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)(unPvertexData.size() * sizeof(float)));
 
 	//normals
 	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)((unPvertexData.size() + unPtextureData.size()) * sizeof(float)));
@@ -186,24 +198,95 @@ bool mte::Mesh::loadData()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	int width, height, nrChannels;
-	unsigned char* data = stbi_load(_textureFileName.c_str(), &width, &height, &nrChannels, 0);
-	if (data)
 	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-		glGenerateMipmap(GL_TEXTURE_2D);
+		int width, height, nrChannels;
+		unsigned char* data = stbi_load(_textureFileName.c_str(), &width, &height, &nrChannels, 0);
+		if (data)
+		{
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			glGenerateMipmap(GL_TEXTURE_2D);
+		}
+		else
+		{
+			Error error;
+			error._errorLocation = "Mesh.cpp";
+			error._errorSeverity = mte::ErrorSeverityLevel::bad;
+			error._errorTypes.push_back(mte::ErrorType::LoadFail);
+			error._errorMessage = "Failed to load texture: " + _textureFileName;
+			_logger.sendError(error);
+		}
+		stbi_image_free(data);
 	}
-	else
-	{
-		Error error;
-		error._errorLocation = "Mesh.cpp";
-		error._errorSeverity = mte::ErrorSeverityLevel::bad;
-		error._errorTypes.push_back(mte::ErrorType::LoadFail);
-		error._errorMessage = "Failed to load texture: " + _textureFileName;
-		_logger.sendError(error);
-	}
-	stbi_image_free(data);
 
+
+	glGenTextures(1, &_specularMap);
+	glBindTexture(GL_TEXTURE_2D, _specularMap);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	{
+		std::string filename = "Assets/Textures/default_map.jpg";
+		if (_specularFileName != "")
+		{
+			filename = _specularFileName;
+		}
+		int width, height, nrChannels;
+		unsigned char* data = stbi_load(filename.c_str(), &width, &height, &nrChannels, 0);
+		if (data)
+		{
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			glGenerateMipmap(GL_TEXTURE_2D);
+		}
+		else
+		{
+			Error error;
+			error._errorLocation = "Mesh.cpp";
+			error._errorSeverity = mte::ErrorSeverityLevel::bad;
+			error._errorTypes.push_back(mte::ErrorType::LoadFail);
+			error._errorMessage = "Failed to load specular texture: " + filename;
+			_logger.sendError(error);
+		}
+		stbi_image_free(data);
+	}
+
+
+	glGenTextures(1, &_emissionMap);
+	glBindTexture(GL_TEXTURE_2D, _emissionMap);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	{
+		std::string filename = "Assets/Textures/default_map.jpg";
+		if (_emissionFileName != "") 
+		{
+			filename = _emissionFileName;
+		}
+		int width, height, nrChannels;
+		unsigned char* data = stbi_load(filename.c_str(), &width, &height, &nrChannels, 0);
+		if (data)
+		{
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			glGenerateMipmap(GL_TEXTURE_2D);
+		}
+		else
+		{
+			Error error;
+			error._errorLocation = "Mesh.cpp";
+			error._errorSeverity = mte::ErrorSeverityLevel::bad;
+			error._errorTypes.push_back(mte::ErrorType::LoadFail);
+			error._errorMessage = "Failed to load emissive texture: " + filename;
+			_logger.sendError(error);
+		}
+		stbi_image_free(data);
+	}
 
 	_loaded = true;
 	return true;

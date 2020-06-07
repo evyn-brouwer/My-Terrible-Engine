@@ -21,9 +21,15 @@ void mte::MeshContainer::draw()
 		if (_camera != nullptr) {
 			_shader->SetUniform("viewPos", _camera->GetPosition());
 		}
-		_shader->SetUniform("material.ambient", glm::vec3(1.0));
-		_shader->SetUniform("material.diffuse", glm::vec3(1.0));
-		_shader->SetUniform("material.specular", glm::vec3(1.0));
+		_shader->SetUniform("material.diffuse", 0);
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D,_mesh->_texture);
+		_shader->SetUniform("material.specular", 1);
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, _mesh->_specularMap);
+		_shader->SetUniform("material.emission", 2);
+		glActiveTexture(GL_TEXTURE2);
+		glBindTexture(GL_TEXTURE_2D, _mesh->_emissionMap);
 		_shader->SetUniform("material.shininess", 32.0f);
 		_mesh->draw();
 	}
