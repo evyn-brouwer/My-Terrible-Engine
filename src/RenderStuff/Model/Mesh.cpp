@@ -199,7 +199,7 @@ bool mte::Mesh::loadData()
 		unsigned char* data = stbi_load(_textureFileName.c_str(), &width, &height, &nrChannels, 0);
 		if (data)
 		{
-			GLenum format;
+			GLenum format = GL_RGB;
 			if (nrChannels == 1)
 				format = GL_RED;
 			else if (nrChannels == 3)
@@ -245,7 +245,7 @@ bool mte::Mesh::loadData()
 		unsigned char* data = stbi_load(filename.c_str(), &width, &height, &nrChannels, 0);
 		if (data)
 		{
-			GLenum format;
+			GLenum format = GL_RGB;
 			if (nrChannels == 1)
 				format = GL_RED;
 			else if (nrChannels == 3)
@@ -291,7 +291,7 @@ bool mte::Mesh::loadData()
 		unsigned char* data = stbi_load(filename.c_str(), &width, &height, &nrChannels, 0);
 		if (data)
 		{
-			GLenum format;
+			GLenum format = GL_RGB;
 			if (nrChannels == 1)
 				format = GL_RED;
 			else if (nrChannels == 3)

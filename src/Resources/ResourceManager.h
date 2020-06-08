@@ -2,7 +2,7 @@
 
 #include "RenderStuff/ShaderStuff/Shader.h"
 #include "RenderStuff/Model/Mesh.h"
-
+//#include "RenderStuff/Model/TextureContainer.h"
 
 namespace mte {
 	class ResourceManager {
@@ -16,6 +16,11 @@ namespace mte {
 		std::shared_ptr<mte::Mesh> createMesh(std::string meshFile, std::string meshName, std::string texturefile, std::string textureName);
 		static std::vector<std::shared_ptr<mte::Mesh>> _meshes;
 
+		//std::shared_ptr<mte::TextureContainer> createTexture(std::string textureName, std::string textureFile);
+		//static std::vector<std::shared_ptr<mte::TextureContainer>> _textures;
+
+
+		//light cube stuff
 		void drawLightCubes(std::shared_ptr<Camera> camera);
 		void updateDrawCubes();
 

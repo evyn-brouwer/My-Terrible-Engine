@@ -84,6 +84,9 @@
     <ClCompile Include="src\RenderStuff\Lighting\LightCube.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\RenderStuff\Model\TextureContainer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Game.h">
@@ -156,6 +159,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\RenderStuff\Lighting\LightCube.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RenderStuff\Model\TextureContainer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

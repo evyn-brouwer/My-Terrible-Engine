@@ -46,6 +46,18 @@ std::shared_ptr<mte::Mesh> mte::ResourceManager::createMesh(std::string meshFile
 	return tempMesh;
 }
 
+//std::shared_ptr<mte::TextureContainer> mte::ResourceManager::createTexture(std::string textureName, std::string textureFile)
+//{
+//	for (auto x : _textures) {
+//		if (x->_textureName == textureName && x->_textureFile == textureFile) {
+//			return x;
+//		}
+//	}
+//	std::shared_ptr<mte::TextureContainer> tempTexture = std::make_shared<mte::TextureContainer>(textureName, textureFile);
+//	_textures.push_back(tempTexture);
+//	return tempTexture;
+//}
+
 void mte::ResourceManager::drawLightCubes(std::shared_ptr<Camera> camera)
 {
 	for (auto x : _shaders) {
