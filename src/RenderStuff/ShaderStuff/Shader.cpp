@@ -160,6 +160,14 @@ void mte::Shader::SetUniform(const char* name, const float& value) {
 	}
 }
 
+void mte::Shader::SetUniform(const char* name, const int& value)
+{
+	GLint loc = glGetUniformLocation(myShaderHandle, name);
+	if (loc != -1) {
+		glProgramUniform1iv(myShaderHandle, loc, 1, &value);
+	}
+}
+
 
 void mte::Shader::drawCubes(std::shared_ptr<Camera> camera)
 {

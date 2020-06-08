@@ -190,21 +190,31 @@ bool mte::Mesh::loadData()
 
 
 	glGenTextures(1, &_texture);
-	glBindTexture(GL_TEXTURE_2D, _texture);
+	
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	
 
 	{
 		int width, height, nrChannels;
 		unsigned char* data = stbi_load(_textureFileName.c_str(), &width, &height, &nrChannels, 0);
 		if (data)
 		{
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			GLenum format;
+			if (nrChannels == 1)
+				format = GL_RED;
+			else if (nrChannels == 3)
+				format = GL_RGB;
+			else if (nrChannels == 4)
+				format = GL_RGBA;
+			glBindTexture(GL_TEXTURE_2D, _texture);
+			glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
 			glGenerateMipmap(GL_TEXTURE_2D);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+			stbi_image_free(data);
 		}
 		else
 		{
@@ -214,19 +224,16 @@ bool mte::Mesh::loadData()
 			error._errorTypes.push_back(mte::ErrorType::LoadFail);
 			error._errorMessage = "Failed to load texture: " + _textureFileName;
 			_logger.sendError(error);
+			stbi_image_free(data);
 		}
-		stbi_image_free(data);
+		
 	}
 
 
 	glGenTextures(1, &_specularMap);
-	glBindTexture(GL_TEXTURE_2D, _specularMap);
+	
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	
 
 	{
 		std::string filename = "Assets/Textures/default_map.jpg";
@@ -238,8 +245,22 @@ bool mte::Mesh::loadData()
 		unsigned char* data = stbi_load(filename.c_str(), &width, &height, &nrChannels, 0);
 		if (data)
 		{
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			GLenum format;
+			if (nrChannels == 1)
+				format = GL_RED;
+			else if (nrChannels == 3)
+				format = GL_RGB;
+			else if (nrChannels == 4)
+				format = GL_RGBA;
+			glBindTexture(GL_TEXTURE_2D, _specularMap);
+			glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
 			glGenerateMipmap(GL_TEXTURE_2D);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+			stbi_image_free(data);
 		}
 		else
 		{
@@ -249,22 +270,19 @@ bool mte::Mesh::loadData()
 			error._errorTypes.push_back(mte::ErrorType::LoadFail);
 			error._errorMessage = "Failed to load specular texture: " + filename;
 			_logger.sendError(error);
+			stbi_image_free(data);
 		}
-		stbi_image_free(data);
+		
 	}
 
 
 	glGenTextures(1, &_emissionMap);
-	glBindTexture(GL_TEXTURE_2D, _emissionMap);
+	
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	
 
 	{
-		std::string filename = "Assets/Textures/default_map.jpg";
+		std::string filename = "Assets/Textures/meme.jpg";
 		if (_emissionFileName != "") 
 		{
 			filename = _emissionFileName;
@@ -273,8 +291,22 @@ bool mte::Mesh::loadData()
 		unsigned char* data = stbi_load(filename.c_str(), &width, &height, &nrChannels, 0);
 		if (data)
 		{
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			GLenum format;
+			if (nrChannels == 1)
+				format = GL_RED;
+			else if (nrChannels == 3)
+				format = GL_RGB;
+			else if (nrChannels == 4)
+				format = GL_RGBA;
+			glBindTexture(GL_TEXTURE_2D, _emissionMap);
+			glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
 			glGenerateMipmap(GL_TEXTURE_2D);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+			stbi_image_free(data);
 		}
 		else
 		{
@@ -284,8 +316,9 @@ bool mte::Mesh::loadData()
 			error._errorTypes.push_back(mte::ErrorType::LoadFail);
 			error._errorMessage = "Failed to load emissive texture: " + filename;
 			_logger.sendError(error);
+			stbi_image_free(data);
 		}
-		stbi_image_free(data);
+		
 	}
 
 	_loaded = true;
