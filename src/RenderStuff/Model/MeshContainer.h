@@ -19,6 +19,9 @@ namespace mte {
 		bool _active = true;
 
 		std::shared_ptr<mte::Mesh> _mesh;
+		std::shared_ptr<mte::TextureContainer> _diffuse;
+		std::shared_ptr<mte::TextureContainer> _specular;
+		std::shared_ptr<mte::TextureContainer> _emission;
 
 		std::shared_ptr <mte::Shader> _shader;
 

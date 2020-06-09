@@ -1,5 +1,7 @@
 #include "TextureContainer.h"
 
+
+
 mte::TextureContainer::TextureContainer(std::string textureName, std::string textureFile)
 	:_textureName(textureName),_textureFile(textureFile)
 {
