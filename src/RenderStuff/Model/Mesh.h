@@ -7,9 +7,7 @@ namespace mte {
 	class Mesh
 	{
 	public:
-		Mesh(std::string meshFile, std::string meshName,std::string texturefile, std::string textureName);
-		Mesh(std::string meshFile, std::string meshName, std::string texturefile, std::string textureName, std::string specularFile, std::string specularName);
-		Mesh(std::string meshFile, std::string meshName, std::string texturefile, std::string textureName, std::string specularFile, std::string specularName, std::string emissionFile, std::string emissionName);
+		Mesh(std::string meshFile, std::string meshName);
 
 		Mesh(Mesh& copy);
 		virtual ~Mesh();
@@ -17,13 +15,6 @@ namespace mte {
 		virtual void draw();
 
 		std::string _meshName = "";
-		std::string _textureName = "";
-		std::string _specularName = "";
-		std::string _emissionName = "";
-
-		GLuint _texture;
-		GLuint _specularMap;
-		GLuint _emissionMap;
 
 	private:
 		Logger _logger;
@@ -44,13 +35,8 @@ namespace mte {
 		std::vector<float> _normals;
 
 
-		std::string _meshFileName = "";
+		std::string _meshFile = "";
 
-		std::string _textureFileName = "";
-
-		std::string _specularFileName = "";
-		
-		std::string _emissionFileName = "";
 
 		bool _active = true;
 	};

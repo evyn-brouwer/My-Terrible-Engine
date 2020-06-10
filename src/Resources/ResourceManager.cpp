@@ -35,14 +35,14 @@ std::shared_ptr<mte::Shader> mte::ResourceManager::getShader(std::string shaderN
 	return NULL;
 }
 
-std::shared_ptr<mte::Mesh> mte::ResourceManager::createMesh(std::string meshFile, std::string meshName, std::string texturefile, std::string textureName)
+std::shared_ptr<mte::Mesh> mte::ResourceManager::createMesh(std::string meshFile, std::string meshName)
 {
 	for (auto x : _meshes) {
-		if (x->_meshName == meshName && x->_textureName == textureName) {
+		if (x->_meshName == meshName) {
 			return x;
 		}
 	}
-	std::shared_ptr<mte::Mesh> tempMesh = std::make_shared<mte::Mesh>(meshFile, meshName, texturefile, textureName);
+	std::shared_ptr<mte::Mesh> tempMesh = std::make_shared<mte::Mesh>(meshFile, meshName);
 	_meshes.push_back(tempMesh);
 	return tempMesh;
 }
@@ -55,6 +55,18 @@ std::shared_ptr<mte::TextureContainer> mte::ResourceManager::createTexture(std::
 		}
 	}
 	std::shared_ptr<mte::TextureContainer> tempTexture = std::make_shared<mte::TextureContainer>(textureName, textureFile);
+	_textures.push_back(tempTexture);
+	return tempTexture;
+}
+
+std::shared_ptr<mte::TextureContainer> mte::ResourceManager::createTexture()
+{
+	for (auto x : _textures) {
+		if (x->_textureName == "Default" && x->_textureFile == "Assets/Textures/default_map.jpg") {
+			return x;
+		}
+	}
+	std::shared_ptr<mte::TextureContainer> tempTexture = std::make_shared<mte::TextureContainer>("Default", "Assets/Textures/default_map.jpg");
 	_textures.push_back(tempTexture);
 	return tempTexture;
 }

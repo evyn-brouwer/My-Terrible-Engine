@@ -13,9 +13,10 @@ namespace mte {
 		std::shared_ptr<mte::Shader> getShader(std::string shaderName);
 
 
-		std::shared_ptr<mte::Mesh> createMesh(std::string meshFile, std::string meshName, std::string texturefile, std::string textureName);
+		std::shared_ptr<mte::Mesh> createMesh(std::string meshFile, std::string meshName);
 		static std::vector<std::shared_ptr<mte::Mesh>> _meshes;
 
+		std::shared_ptr<mte::TextureContainer> createTexture();
 		std::shared_ptr<mte::TextureContainer> createTexture(std::string textureName, std::string textureFile);
 		static std::vector<std::shared_ptr<mte::TextureContainer>> _textures;
 

@@ -1,9 +1,8 @@
 #include "MeshContainer.h"
 
-mte::MeshContainer::MeshContainer(std::string meshTag, std::shared_ptr<Camera> camera, std::shared_ptr<mte::Mesh> mesh, std::shared_ptr<mte::Shader> shader)
-	:_camera(camera),_mesh(mesh),_shader(shader),_meshTag(meshTag)
+mte::MeshContainer::MeshContainer(std::string meshTag, std::shared_ptr<Camera> camera, std::shared_ptr<mte::Shader> shader, std::shared_ptr<mte::Mesh> mesh, std::shared_ptr<mte::TextureContainer> diffuse, std::shared_ptr<mte::TextureContainer> specular, std::shared_ptr<mte::TextureContainer> emission)
+	: _camera(camera), _mesh(mesh), _shader(shader), _meshTag(meshTag),_diffuse(diffuse),_specular(specular),_emission(emission)
 {
-
 }
 
 void mte::MeshContainer::draw()
@@ -22,13 +21,13 @@ void mte::MeshContainer::draw()
 			_shader->SetUniform("viewPos", _camera->GetPosition());
 		}
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, _mesh->_texture);
+		glBindTexture(GL_TEXTURE_2D, _diffuse->_texture);
 		_shader->SetUniform("material.diffuse", 0);
 		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, _mesh->_specularMap);
+		glBindTexture(GL_TEXTURE_2D, _specular->_texture);
 		_shader->SetUniform("material.specular", 1);
 		glActiveTexture(GL_TEXTURE2);
-		glBindTexture(GL_TEXTURE_2D, _mesh->_emissionMap);
+		glBindTexture(GL_TEXTURE_2D, _emission->_texture);
 		_shader->SetUniform("material.emission", 2);
 		
 		_shader->SetUniform("material.shininess", 32.0f);

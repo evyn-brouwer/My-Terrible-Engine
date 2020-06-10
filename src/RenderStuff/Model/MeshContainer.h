@@ -8,7 +8,8 @@
 namespace mte {
 	class MeshContainer {
 	public:
-		MeshContainer(std::string meshTag, std::shared_ptr<Camera> camera, std::shared_ptr<mte::Mesh> mesh, std::shared_ptr<mte::Shader> shader);
+		MeshContainer(std::string meshTag, std::shared_ptr<Camera> camera, std::shared_ptr<mte::Shader> shader, std::shared_ptr<mte::Mesh> mesh,
+			std::shared_ptr<mte::TextureContainer> diffuse, std::shared_ptr<mte::TextureContainer> specular, std::shared_ptr<mte::TextureContainer> emission);
 
 		void draw();
 		void update(float dt);
