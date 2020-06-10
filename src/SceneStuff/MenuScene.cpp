@@ -9,20 +9,10 @@ MenuScene::MenuScene(GLFWwindow* window, std::string sceneName)
 
 void MenuScene::loadData()
 {
-	
-	myTestShader = _resources.createShader("testShader", "./Assets/Shaders/testShader.vs", "./Assets/Shaders/testShader.fs");
-
-
 	myTestCamera = std::make_shared<Camera>();
 	myTestCamera->SetPosition(glm::vec3(5, 5, 5));
-	myTestCamera->LookAt(glm::vec3(0));
 	myTestCamera->Projection = glm::perspective(glm::radians(60.0f), 1600.0f/900.0f, 0.01f, 1000.0f);
-	
-	myTestCube = std::make_shared<Cube>(myTestShader,myTestCamera,glm::vec3(0,0,0));
-
-	mytestChunk = std::make_shared<Chunk>(myTestShader, myTestCamera);
-
-	
+		
 	meshShader = _resources.createShader("meshShader", "./Assets/Shaders/meshShader.vs", "./Assets/Shaders/meshShader.fs");
 
 }
@@ -68,14 +58,9 @@ void MenuScene::virtualUpdate(float dt)
 		_newSceneName = "TestScene";
 	}
 		
-	//myTestShader->Bind();
 
 	myTestCamera->Rotate(rotation);
 	myTestCamera->Move(movement);
-
-	myTestCube->_transform->_transformMat = myTestCube->_transform->rotate(glm::vec3(1.0f, 0.0, 0.0), 90.0f * dt);
 	
-	myTestCube->draw();
 	
-	mytestChunk->draw();
 }

@@ -79,9 +79,4 @@ void TestScene::virtualUpdate(float dt)
 	_testModel->update(dt);
 	_testModel->draw();
 
-	//std::shared_ptr<mte::Shader> _tempShader = _resources.getShader("meshShader");
-	//
-	//_tempShader->_lightCubes[0]->_diffuse.x = sin(glfwGetTime() * 2.0f);
-	//_tempShader->_lightCubes[0]->_diffuse.y = sin(glfwGetTime() * 0.7f);
-	//_tempShader->_lightCubes[0]->_diffuse.z = sin(glfwGetTime() * 1.3f);
 }

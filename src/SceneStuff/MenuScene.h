@@ -1,9 +1,6 @@
 #pragma once
 
 #include "Scene.h"
-#include "RenderStuff/Cube.h"
-#include "WorldStuff/Block.h"
-#include "WorldStuff/Chunk.h"
 
 #include "Resources/ResourceManager.h"
 
@@ -27,11 +24,7 @@ private:
 
 	virtual void virtualUpdate(float dt)override;
 
-	std::shared_ptr<mte::Shader> myTestShader = NULL;;
 	std::shared_ptr<Camera> myTestCamera = NULL;
-	std::shared_ptr<Cube> myTestCube = NULL;
-	std::shared_ptr<Chunk> mytestChunk = NULL;
-
 	std::shared_ptr<mte::Shader> meshShader;
 
 
