@@ -7,7 +7,7 @@ namespace mte {
 	public:
 		Model() {};
 
-		void addMesh(std::shared_ptr<MeshContainer> mesh) { _meshes.push_back(mesh); };
+		void addMesh(std::shared_ptr<MeshContainer> mesh);
 
 		void draw();
 		void update(float dt);

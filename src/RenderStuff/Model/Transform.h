@@ -29,7 +29,7 @@ public:
 
 	glm::mat4 _transformMat{1.0f};
 
-	std::shared_ptr<glm::mat4> _parentTransform;
+	glm::mat4* _parentTransform = NULL;
 	glm::mat4 _worldTransformMat{ 1.0f };
 
 	glm::vec4* _position = nullptr;

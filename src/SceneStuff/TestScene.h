@@ -26,6 +26,8 @@ private:
 
 	std::shared_ptr<mte::Model> _testModel;
 
+	std::shared_ptr<mte::Model> _testBread;
+
 	
 
 	

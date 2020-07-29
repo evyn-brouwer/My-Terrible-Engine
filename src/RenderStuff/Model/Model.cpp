@@ -1,5 +1,11 @@
 #include "Model.h"
 
+void mte::Model::addMesh(std::shared_ptr<MeshContainer> mesh)
+{
+	mesh->_tranform._parentTransform = &_transform._transformMat;
+	 _meshes.push_back(mesh); 
+}
+
 void mte::Model::draw()
 {
 	if(_active)
@@ -10,6 +16,7 @@ void mte::Model::draw()
 
 void mte::Model::update(float dt)
 {
+	_transform.update();
 	if (_active)
 		for (unsigned i = 0; i < _meshes.size(); i++) {
 			_meshes[i]->update(dt);

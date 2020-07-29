@@ -1,4 +1,5 @@
 #include "TestScene.h"
+#include <math.h>
 
 TestScene::TestScene(GLFWwindow* window, std::string sceneName)
 	:Scene(window,sceneName)
@@ -15,9 +16,13 @@ void TestScene::loadData()
 
 	_testModel = std::make_shared<mte::Model>();
 	_testModel->addMesh(std::make_shared<mte::MeshContainer>("box0",_myTestCamera, _resources.createShader("testMeshShader", "./Assets/Shaders/testShader.vs", "./Assets/Shaders/testShader.fs"), _resources.createMesh("Assets/Meshes/test.obj", "Test Mesh"), _resources.createTexture( "Test Texture", "Assets/Textures/meme.jpg"), _resources.createTexture(), _resources.createTexture()));
-	_testModel->addMesh(std::make_shared<mte::MeshContainer>("box1",_myTestCamera, _resources.createShader("meshShader", "./Assets/Shaders/meshShader.vs", "./Assets/Shaders/meshShader.fs"),_resources.createMesh("Assets/Meshes/box.obj", "Box Mesh"), _resources.createTexture(), _resources.createTexture("Specular Test", "Assets/Textures/Specular_test_map.png"), _resources.createTexture()));
+	_testModel->addMesh(std::make_shared<mte::MeshContainer>("box1",_myTestCamera, _resources.createShader("meshShader", "./Assets/Shaders/meshShader.vs", "./Assets/Shaders/meshShader.fs"),_resources.createMesh("Assets/Meshes/box.obj", "Box Mesh"), _resources.createTexture("Box Texture", "Assets/Textures/boxdiffuse.jpg"), _resources.createTexture(), _resources.createTexture()));
 
-	std::shared_ptr<mte::LightCube> tempLight = std::make_shared<mte::LightCube>(glm::vec3(5, 1, 6), glm::vec3(1, 1, 1), glm::vec3(1, 1, 1), glm::vec3(1, 1, 1));
+	_testBread = std::make_shared<mte::Model>();
+	_testBread->addMesh(std::make_shared<mte::MeshContainer>("bread", _myTestCamera, _resources.createShader("meshShader", "./Assets/Shaders/meshShader.vs", "./Assets/Shaders/meshShader.fs"), _resources.createMesh("Assets/Meshes/Bread.obj","Bread Mesh"),_resources.createTexture("Bread Texture","Assets/Textures/Bread_diffuse.png"), _resources.createTexture("Bread Specular","Assets/Textures/Bread_Specular.png"), _resources.createTexture()));
+	_testBread->getTransform().translate(glm::vec4(4.0,0.0,0.0,0.0));
+
+	std::shared_ptr<mte::LightCube> tempLight = std::make_shared<mte::LightCube>(glm::vec3(5, 1, 6), glm::vec3(1, 1, 1), glm::vec3(1, 1, 1), glm::vec3(1, 1, 1), 1.0f, 0.09f, 0.032f);
 	_resources.getShader("meshShader")->_lightCubes.push_back(tempLight);
 
 }
@@ -76,7 +81,13 @@ void TestScene::virtualUpdate(float dt)
 		tempModel->_tranform.translate(glm::vec3(0,0.01*dt,0));
 	}
 
+	//std::shared_ptr<mte::LightCube> tempLight = tempModel->_shader->_lightCubes[0];
+	//tempLight->_pos.y = sin(glfwGetTime()) * 10;
+
 	_testModel->update(dt);
 	_testModel->draw();
+
+	_testBread->update(dt);
+	_testBread->draw();
 
 }

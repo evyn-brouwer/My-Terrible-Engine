@@ -16,6 +16,9 @@ void mte::MeshContainer::draw()
 			_shader->SetUniform("light.diffuse", _shader->_lightCubes[0]->_diffuse);
 			_shader->SetUniform("light.specular", _shader->_lightCubes[0]->_specular);
 			_shader->SetUniform("light.ambient", _shader->_lightCubes[0]->_ambient);
+			_shader->SetUniform("light.constant", _shader->_lightCubes[0]->_constant);
+			_shader->SetUniform("light.linear", _shader->_lightCubes[0]->_linear);
+			_shader->SetUniform("light.quadratic", _shader->_lightCubes[0]->_quadratic);
 		}
 		if (_camera != nullptr) {
 			_shader->SetUniform("viewPos", _camera->GetPosition());
